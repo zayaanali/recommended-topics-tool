@@ -1,6 +1,6 @@
 # CS225 Final Project
 
-## Team Members: zaali2, aswar3, shyammt2 , ...
+## Team Members: zaali2, aswar3, shyammt2 , bchang
 
 ## Introduction
 
