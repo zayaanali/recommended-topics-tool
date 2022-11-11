@@ -14,15 +14,19 @@ int main() {
   static std::map<int, int> log;
   static std::map<int,std::string> titles;
   std::vector<std::pair<int,int>> filtered;
-  std::ifstream infile("Downloads/wikidata.txt");
-  std::ifstream infile2("Downloads/enwiki-2013-names.csv");
+  std::ifstream infile("data/wikidata.txt"); //edge file
+  std::ifstream infile2("data/enwiki-2013-names.csv"); //titles file
   std::string line;
-  while (infile2 >> line) {
+  while (infile2) {
+    std::getline(infile2, line);
     std::stringstream s_stream(line);
-    while(s_stream.good()) {
-     std::string part;
-     std::getline(s_stream, part, ','); //get first string delimited by comma
-     result.push_back(substr);
+    size_t pos = line.find(',');
+    std::cout << line << '\n';
+    int idx = std::stoi(line.substr(0, pos));
+    line.erase(0, pos + 1);
+    titles[idx] = line;
+    if (idx == 4206784) { //number of wikipedia pages
+      break;
     }
   }
   int from, to;
@@ -38,7 +42,8 @@ int main() {
   std::sort(filtered.begin(), filtered.end(), compare);
   std::ofstream Writing("filteredwiki.txt");
   for (auto i: filtered) {
-    Writing << i.first << '\n';
+    // Writing << i.first << '\n';
+    Writing << i.first << ',' << titles[i.first] << '\n';
   }
   Writing.close();
   std::cout << "SIZE OF FILTERED IS: " << filtered.size() << '\n';
