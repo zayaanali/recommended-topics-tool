@@ -35,3 +35,14 @@ If two page titles have been inputted, using the stored shortest path matrices f
 The expected output from these two Wikipedia pages would be the highest betweenness centrality node on the path that should be most related to both pages, which we can find by retracing the path and accessing the stored betweenness centrality values. To visualize the output, we will display the link that represents the middle node topic along with the full path between the two nodes. In summary, converting the title of the Wikipedia pages to integer IDs is O(1), and retracing the full path between two nodes and finding the node with highest betweenness centrality using the computed matrices is O(path length). The overall runtime is then O(path length) which should be constant in most cases. 
 
 Memory and storage efficiency is discussed in “Data Storage.”
+
+## Timeline
+Data Acquisition: Completed by November 7th
+Data Processing: Completed by November 9th
+Completion of BFS Traversal and Makefile: Completed by November 16th
+Completion of Strongly Connected Component Kosaraju algorithm: Completed by November 24th
+Completion of Brandes algorithm: Completed by November 30th
+Code Final Testing and Verification: Completed by December 2nd
+Production of Final Deliverables: Completed by December 6th
+Final Edits and Minor Changes (if necessary): Completed by December 8th
+
