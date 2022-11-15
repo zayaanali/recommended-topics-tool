@@ -37,12 +37,13 @@ The expected output from these two Wikipedia pages would be the highest betweenn
 Memory and storage efficiency is discussed in “Data Storage.”
 
 ## Timeline
-Data Acquisition: Completed by November 7th
-Data Processing: Completed by November 9th
-Completion of BFS Traversal and Makefile: Completed by November 16th
-Completion of Strongly Connected Component Kosaraju algorithm: Completed by November 24th
-Completion of Brandes algorithm: Completed by November 30th
-Code Final Testing and Verification: Completed by December 2nd
-Production of Final Deliverables: Completed by December 6th
-Final Edits and Minor Changes (if necessary): Completed by December 8th
+Data Acquisition: Completed by November 7th<br />
+Data Processing: Completed by November 9th<br />
+Completion of BFS Traversal and Makefile: Completed by November 16th<br />
+Completion of Strongly Connected Component Kosaraju algorithm: Completed by November 24th<br />
+Completion of Brandes algorithm: Completed by November 30th<br /
+Code Final Testing and Verification: Completed by December 2nd<br />
+Production of Final Deliverables: Completed by December 6th<br />
+Final Edits and Minor Changes (if necessary): Completed by December 8th <br />
+
 
