@@ -48,5 +48,5 @@ int main() {
   }
   Writing.close();
   std::cout << "SIZE OF FILTERED IS: " << filtered.size() << '\n';
-
+  
 }

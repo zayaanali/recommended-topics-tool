@@ -19,7 +19,6 @@ int main() {
   while (infile2 >> from >> to) {
     full_adj[from].push_back(to);
   }
-  std::cout << "MADE IT" << '\n';
   std::string line;
   while (infile) {
     std::getline(infile, line);
@@ -32,8 +31,8 @@ int main() {
       break;
     }
   }
-  std::cout << "Here" << '\n';
-  std::ofstream Writing("../data/filterededges.txt");
+  std::ofstream Writing("../data/filteredadj.txt");
+  //writes out adjacency list
   for (auto itr = trimmed.begin(); itr != trimmed.end(); itr++) {
     std::vector<int> adjacent = full_adj[*itr];
     std::vector<int> newadj;
