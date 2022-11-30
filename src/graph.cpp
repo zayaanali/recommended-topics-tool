@@ -1,5 +1,6 @@
 #include "graph.h"
-Graph::Graph(const std::string& filename) {
+#include <iostream>
+Graph::Graph(const std::string& filename, int num) {
     std::ifstream infile(filename); //edge file
     //load adj list
     std::string line;
@@ -12,14 +13,14 @@ Graph::Graph(const std::string& filename) {
         idxs_.insert(nodeID);
         parts.erase(parts.begin());
         graph_[nodeID] = parts;
-        if (idx == 42196) { //number of pages with more than 100 links to it
-        break;
+        if (idx == num) { //number of pages with more than 100 links to it
+            break;
         }
         idx++;
     }
 }   
 
-std::unordered_set<int> Graph::BFS_Trim(const std::vector<int>& seeds) {
+std::unordered_set<int> Graph::BFS_Trim(const std::vector<int>& seeds, int bound) {
     static std::map<int, bool> visited;
     static std::map<int, int> predecessor;
     for (auto itr = idxs_.begin(); itr != idxs_.end(); itr++) {
@@ -27,7 +28,7 @@ std::unordered_set<int> Graph::BFS_Trim(const std::vector<int>& seeds) {
     }
     std::unordered_set<int> trimmed;
     for (int id: seeds) {
-        BFS(visited, trimmed, predecessor, id, 3);
+        BFS(visited, trimmed, predecessor, id, bound);
         for (auto itr = idxs_.begin(); itr != idxs_.end(); itr++) {
             visited[*itr] = false;
         } 
@@ -42,31 +43,28 @@ void Graph::BFS(std::map<int, bool>& visited, std::unordered_set<int>& nodes, st
   distance[start] = 0;
   visited[start] = true;
   q.push(start);
-  bool finished = false;
-  while (!q.empty() && !finished) {
+  while (!q.empty()) {
     int v = q.front();
+    if (bound > 0 && distance[v] > bound) {
+        break;
+    }
     nodes.insert(v);
     q.pop();
     for (int neighbor: graph_[v]) {
       if (!visited[neighbor]) {
         distance[neighbor] = distance[v] + 1;
-        if (bound > 0 && distance[neighbor] > bound) {
-          finished = true;
-        } else {
-          visited[neighbor] = true;
-          if (start == 2038044) {
-            predecessor[neighbor] = v;
-            //predecessor is only a test for United States as the root
-          }
-          
-          q.push(neighbor);
-        }
+        visited[neighbor] = true;
+        predecessor[neighbor] = v;
+        q.push(neighbor);
         
       }
     }
   }
 }
 
+std::vector<int> Graph::getAdjacent(int idx) {
+    return graph_[idx];
+}
 std::map<int, int> Graph::shortest_paths(int start) {
   static std::map<int, bool> visited;
   static std::map<int, int> predecessor;
