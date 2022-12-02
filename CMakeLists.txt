@@ -4,6 +4,8 @@ cmake_minimum_required(VERSION 3.10)
 set(assignment_name "cs225-final-project") # Name of the assignment
 set(assignment_version 1.2022.12.0) # Version, where minor=semester_year, patch=semester_end_month, tweak=revision
 set(assignment_entrypoints "main") # Entrypoints to run the program
+set(assignment_entrypoints "us_demo") # Entrypoints to run the program
+set(assignment_entrypoints "bfs_trim") # Entrypoints to run the program
 set(assignment_clean_rm "") # Generated files that should be removed with "make clean"
 set(assignment_container "fa22") # Container we are targetting
 

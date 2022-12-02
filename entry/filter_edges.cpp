@@ -8,7 +8,7 @@
 #include <unordered_set>
 #include<sstream>
 
-//creates and stores an adjacency list with only the top 130K nodes
+//creates and stores an adjacency list with only the top 130K nodes from "filter_data"
 int main() {
   static std::map<int, std::vector<int>> full_adj;
   static std::map<int, std::vector<int>> cut_adj;

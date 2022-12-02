@@ -7,7 +7,7 @@
 #include <string>
 #include<sstream>
 
-//finds the top 130K nodes and writes them to a file
+//finds the top 130K nodes from the downloaded data set of wikipedia pages and writes them to a file
 bool compare(const std::pair<int,int> &a,const std::pair<int,int> &b) {
   return a.second > b.second;
 }

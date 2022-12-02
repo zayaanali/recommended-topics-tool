@@ -10,6 +10,7 @@
 #include <queue>
 #include "utils.h"
 
+//filters the CSV file mapping node indexes based on the filtering done in "filter_data"
 int main() {
   static std::map<int, std::vector<int>> adj;
   std::unordered_set<int> idxs;

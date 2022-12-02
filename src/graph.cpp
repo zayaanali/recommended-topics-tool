@@ -1,6 +1,6 @@
 #include "graph.h"
 #include <iostream>
-Graph::Graph(const std::string& filename, int num) {
+Graph::Graph(const std::string& filename, const int& file_length) {
     std::ifstream infile(filename); //edge file
     //load adj list
     std::string line;
@@ -13,11 +13,12 @@ Graph::Graph(const std::string& filename, int num) {
         idxs_.insert(nodeID);
         parts.erase(parts.begin());
         graph_[nodeID] = parts;
-        if (idx == num) { //number of pages with more than 100 links to it
+        if (idx == file_length) { //number of pages with more than 100 links to it
             break;
         }
         idx++;
     }
+  std::cout << graph_.size() << '\n';
 }   
 
 std::unordered_set<int> Graph::BFS_Trim(const std::vector<int>& seeds, int bound) {
@@ -92,7 +93,7 @@ std::map<int, int> Graph::shortest_paths(int start) {
   }
   return predecessor;
 }
-std::map<int,std::string>& load_titles(const std::string& filename, const Graph& graph) {
+std::map<int,std::string>& load_titles(const std::string& filename, const Graph& graph, const int& file_length) {
     static std::map<int,std::string> titles;
     std::ifstream infile2(filename); //titles file
     std::string line;
@@ -107,7 +108,7 @@ std::map<int,std::string>& load_titles(const std::string& filename, const Graph&
         if (graph.idxs_.find(id) != graph.idxs_.end()) {
             titles[id] = line;
         }
-        if (idx == 42196) { //number of titles
+        if (idx == file_length) { //number of titles
             break;
         }
     }
