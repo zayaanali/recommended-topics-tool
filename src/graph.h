@@ -6,6 +6,8 @@
 #include "utils.h"
 #include <sstream>
 #include <fstream>
+#include <stack>
+
 
 class Graph {
     public:
@@ -15,9 +17,15 @@ class Graph {
         std::vector<int> getAdjacent(int idx);
         std::map<int, int> shortest_paths(int start);
         friend std::map<int,std::string>& load_titles(const std::string& filename, const Graph& graph, const int& file_length);
+        //SCC
+        void getSCCs();
+        void dfs_1(int v, std::stack<int> &s);
+        void dfs_2(int v, std::map<int, std::vector<int>> &SCCs, int &numComponents, std::map<int, std::vector<int>> &transpose);
     private:
-        std::map<int, std::vector<int>> graph_;
         std::unordered_set<int> idxs_;
+        // SCC
+        std::map<int, std::vector<int>> graph_;
+        std::vector<bool> visited_;
 };
 
 std::map<int,std::string>& load_titles(const std::string& filename, const Graph& graph, const int& file_length);
