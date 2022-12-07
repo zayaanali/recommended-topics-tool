@@ -13,19 +13,19 @@ Graph::Graph(const std::string& filename, const int& file_length) {
     std::string line;
     int idx = 0;
     while (infile) {
-        std::getline(infile, line);
-        std::vector<int> parts;
-        SplitString(line, ',', parts);
-        int nodeID = parts[0];
-        idxs_.insert(nodeID);
-        parts.erase(parts.begin());
-        graph_[nodeID] = parts;
-        if (idx == file_length) {
-            break;
-        }
-        idx++;
+      if (idx == file_length) {
+          break;
+      }
+      std::getline(infile, line);
+      std::vector<int> parts;
+      SplitString(line, ',', parts);
+      int nodeID = parts[0];
+      idxs_.insert(nodeID);
+      parts.erase(parts.begin());
+      graph_[nodeID] = parts;
+      idx++;
     }
-  std::cout << graph_.size() << '\n';
+  // std::cout << graph_.size() << '\n';
 }
 
 /**
@@ -179,18 +179,19 @@ std::map<int,std::string>& load_titles(const std::string& filename, const Graph&
     std::string line;
     int idx = 0;
     while (infile2) {
-        idx++;
-        std::getline(infile2, line);
-        std::stringstream s_stream(line);
-        size_t pos = line.find(',');
-        int id = std::stoi(line.substr(0, pos));
-        line.erase(0, pos + 1);
-        if (graph.idxs_.find(id) != graph.idxs_.end()) {
-            titles[id] = line;
-        }
-        if (idx == file_length) {
+      if (idx == file_length) {
             break;
-        }
+      }
+        
+      std::getline(infile2, line);
+      std::stringstream s_stream(line);
+      size_t pos = line.find(',');
+      int id = std::stoi(line.substr(0, pos));
+      line.erase(0, pos + 1);
+      if (graph.idxs_.find(id) != graph.idxs_.end()) {
+          titles[id] = line;
+      }
+      idx++;
     }
     return titles;
 }
