@@ -120,6 +120,50 @@ std::vector<int> Graph::getAdjacent(int idx) {
     return graph_[idx];
 }
 
+std::map<int, double> &Graph::brandes_bfs() {
+  static std::map<int, double> C_b;
+  for (auto itr = idxs_.begin(); itr != idxs_.end(); itr++) {
+    std::map<int, double> sigma;
+    std::map<int, std::vector<int>> predecessor;
+    std::stack<int> s;
+    std::queue<int> q;
+    std::map<int, int> distance;
+    std::map<int, double> delta;
+    for (auto itrd = idxs_.begin(); itrd != idxs_.end(); itrd++) {
+      distance[*itrd] = -1;
+    }
+    q.push(*itr);
+    sigma[*itr] = 1;
+    distance[*itr] = 0;
+    while (!q.empty()) {
+      int v = q.front();
+      q.pop();
+      s.push(v);
+      for (int neighbor: graph_[v]) {
+        if (distance[neighbor] < 0) {
+          distance[neighbor] = distance[v] + 1;
+          q.push(neighbor);
+        }
+        if (distance[neighbor] == distance[v] + 1) {
+          sigma[neighbor] += sigma[v];
+          predecessor[neighbor].push_back(v);
+        }
+      }
+    }
+    while (!s.empty()) {
+      int w = s.front();
+      s.pop();
+      for (int v : predecessor[w]) {
+        delta[v] += (sigma[v] / sigma[w])*(1 + delta[w]);
+        if (*itr != w) {
+          C_b[w] += delta[w];
+        }
+      }
+    }
+  }
+  return C_b;
+}
+
 /**
  * Loads a CSV of the Wikipedia titles for each index into a map. 
  * Each line in the file should be of the form "index, titles"

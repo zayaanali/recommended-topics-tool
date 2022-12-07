@@ -16,7 +16,7 @@ class Graph {
         void BFS(std::unordered_set<int>& nodes, int start, int bound);
         std::map<int, int>&  BFS(int start);
         std::vector<int> getAdjacent(int idx);
-        std::map<int, int> brandes_bfs();
+        std::map<int, double> &brandes_bfs();
         friend std::map<int,std::string>& load_titles(const std::string& filename, const Graph& graph, const int& file_length);
         //SCC
         void getSCCs();
