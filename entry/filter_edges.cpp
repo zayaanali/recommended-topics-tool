@@ -8,28 +8,34 @@
 #include <unordered_set>
 #include<sstream>
 
-//creates and stores an adjacency list with only the top 130K nodes from "filter_data"
+/** filter_edges.cpp
+ * second step in data parsing pipeline
+ * creates and stores an adjacency list with only the top 130K nodes from the Wikipedia data set
+ * Uses the edges file and the list of top 130K nodes from "filter_data.cpp" to create the adjacency list
+ * writes out output to "filteredadj.txt" as a csv where each line has the index of the node followed by all the nodes it is adjacent to
+*/
 int main() {
   static std::map<int, std::vector<int>> full_adj;
   static std::map<int, std::vector<int>> cut_adj;
   std::unordered_set<int> trimmed;
-  std::ifstream infile("../filteredwiki.txt");
+  std::ifstream infile("../data/filteredwiki.txt");
   std::ifstream infile2("../data/wikidata.txt"); //edge file
   int from, to;
   while (infile2 >> from >> to) {
     full_adj[from].push_back(to);
   }
   std::string line;
+  int idx = 0;
   while (infile) {
+    if (idx == 131511) { //length of file
+      break;
+    }
     std::getline(infile, line);
     std::stringstream s_stream(line);
     size_t pos = line.find(',');
-    std::cout << line << '\n';
-    int idx = std::stoi(line.substr(0, pos));
-    trimmed.insert(idx);
-    if (idx == 131511) { //number of pages with more than 100 links to it
-      break;
-    }
+    int nodeID = std::stoi(line.substr(0, pos));
+    trimmed.insert(nodeID);
+    idx++;
   }
   std::ofstream Writing("../data/filteredadj.txt");
   //writes out adjacency list

@@ -10,10 +10,12 @@
 #include <queue>
 #include "utils.h"
 #include "graph.h"
-//us_demo.cpp, CAN SEARCH SHORTEST PATH FROM ANY NODE TO US, ALSO TRIMS DOWN NODES USING BFS
-void BFS(std::map<int, std::vector<int>>& adj, std::map<int, bool>& visited, std::unordered_set<int>& nodes, std::map<int, int>& predecessor, int start, int bound) {
-  
-}
+/** us_demo.cpp
+ * demo file that prints out a shortest path from a BFS starting at the "United States"
+ * Can search for shortest path to multiple nodes (while loop)
+ * Searching terminates when "-1" is entered
+*/
+
 int main() {
   static std::map<int,std::string> titles;
   Graph graph("../data/finaladj.txt", 46367);

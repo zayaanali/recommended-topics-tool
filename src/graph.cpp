@@ -120,6 +120,10 @@ std::vector<int> Graph::getAdjacent(int idx) {
     return graph_[idx];
 }
 
+/**
+ * runs Brandes algorithm on the graph. Used pseudocode from https://people.csail.mit.edu/jshun/6886-s19/lectures/lecture3-2.pdf
+ * @return a map storing the betweenness centrality of each node (maps index to betweeness centrality)
+*/
 std::map<int, double> &Graph::brandes_bfs() {
   static std::map<int, double> C_b;
   for (auto itr = idxs_.begin(); itr != idxs_.end(); itr++) {

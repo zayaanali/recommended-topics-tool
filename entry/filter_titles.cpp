@@ -10,17 +10,25 @@
 #include <queue>
 #include "utils.h"
 
-//filters the CSV file mapping node indexes based on the filtering done in "filter_data"
+/** filter_titles.cpp
+  * third step in data parsing pipeline
+  * filters the titles CSV file for each index based on "filteredadj.txt" (generated from "filter_data.cpp")
+  * creates a new titles csv file with only the nodes that were kept after filtering
+  * used to generate "reducedtitles.txt"
+*/
 int main() {
   static std::map<int, std::vector<int>> adj;
   std::unordered_set<int> idxs;
   static std::map<int,std::string> titles;
-  std::ifstream infile("../data/filterededges.txt"); //edge file
+  std::ifstream infile("../data/filteredadj.txt");
   
   //load adj list
   std::string line;
   int idx = 0;
   while (infile) {
+    if (idx == 131511) { //length of the "filteredadj.txt" file
+      break;
+    }
     std::getline(infile, line);
     std::vector<int> parts;
     SplitString(line, ',', parts);
@@ -28,9 +36,6 @@ int main() {
     idxs.insert(nodeID);
     parts.erase(parts.begin());
     adj[nodeID] = parts;
-    if (idx == 131511) { //number of pages with more than 100 links to it
-      break;
-    }
     idx++;
   }
 
@@ -49,7 +54,7 @@ int main() {
       break;
     }
   }
-  std::ofstream Writing("../data/reducedtitles.txt");
+  std::ofstream Writing("../data/filteredtitles.txt");
   for (auto it = titles.begin(); it != titles.end(); it++) {
     Writing << it->first << ',' << it->second << '\n';
   }

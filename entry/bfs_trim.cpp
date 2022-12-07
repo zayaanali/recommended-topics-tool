@@ -10,13 +10,21 @@
 #include <queue>
 #include "utils.h"
 #include "graph.h"
-//BFS FILE, TRIMS 130K NODES DOWN TO ~42K CONNECTED GRAPH WITH UNITED STATES AS THE ROOT. OUTPUTS FINAL ADJACENCY LIST AND FINAL TITLES FILES
+/** bfs_trim.cpp
+  * fourth and final step in data parsing pipeline
+  * Trims down the initially filtered 130K nodes to a single connected graph of around ~46K
+  * Runs BFS_trim with 3 seeds. 
+  * BFS will start at the 3 seeds ("US", "animal", and "food") and travel up to 2 steps away from the node
+  * All nodes that are reached are added to the final set of nodes
+  * Writes out the adjacency list of the trimmed, connected graph to "finaladj.txt"
+  * Writes out the final CSV of title labels for each node index to "finaltitles.txt"
+*/
 int main() {
   static std::map<int,std::string> titles;
   std::unordered_set<int> trimmed;
   Graph graph("../data/filteredadj.txt", 131511);
-  titles = load_titles("../data/reducedtitles.txt", graph, 131511);
-  std::vector<int> topten = {2038044, 3846441, 423902, };
+  titles = load_titles("../data/filteredtitles.txt", graph, 131511);
+  std::vector<int> topten = {2038044, 3846441, 423902}; //United States, Animal, Food (3 general topics)
   trimmed = graph.BFS_Trim(topten, 2);
   std::cout << trimmed.size() << '\n';
   std::ofstream Writing("../data/finaladj.txt");
