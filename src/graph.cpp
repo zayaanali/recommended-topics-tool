@@ -124,18 +124,15 @@ std::vector<int> Graph::getAdjacent(int idx) {
  * runs Brandes algorithm on the graph. Used pseudocode from https://people.csail.mit.edu/jshun/6886-s19/lectures/lecture3-2.pdf
  * @return a map storing the betweenness centrality of each node (maps index to betweeness centrality)
 */
-std::map<int, double> &Graph::brandes_bfs() {
-  static std::map<int, double> C_b;
+std::map<int, double> Graph::brandes() {
+  std::map<int, double> C_b;
   for (auto itr = idxs_.begin(); itr != idxs_.end(); itr++) {
     std::map<int, double> sigma;
     std::map<int, std::vector<int>> predecessor;
     std::stack<int> s;
     std::queue<int> q;
-    std::map<int, int> distance;
+    std::map<int, intdefaultneg> distance; //intdefaultneg is a struct that holds an int initialized to -1
     std::map<int, double> delta;
-    for (auto itrd = idxs_.begin(); itrd != idxs_.end(); itrd++) {
-      distance[*itrd] = -1;
-    }
     q.push(*itr);
     sigma[*itr] = 1;
     distance[*itr] = 0;
@@ -155,7 +152,7 @@ std::map<int, double> &Graph::brandes_bfs() {
       }
     }
     while (!s.empty()) {
-      int w = s.front();
+      int w = s.top();
       s.pop();
       for (int v : predecessor[w]) {
         delta[v] += (sigma[v] / sigma[w])*(1 + delta[w]);
