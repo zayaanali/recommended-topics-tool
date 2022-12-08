@@ -1,44 +1,60 @@
 #include "graph.h"
 #include <iostream>
+
+/**
+ * Constructor to read an file with a comma separated adjacency list (each line has the index followed by the indexes of all the adjacent nodes) and store it in a map adjacency list 
+ * Node indexes are also stored in a set 
+ * @param filename the name of the file with the comma separated adjacency list
+ * @param file_length the length of the file to help with the termination of the while loop
+*/
 Graph::Graph(const std::string& filename, const int& file_length) {
     std::ifstream infile(filename); //edge file
     //load adj list
     std::string line;
     int idx = 0;
     while (infile) {
-        std::getline(infile, line);
-        std::vector<int> parts;
-        SplitString(line, ',', parts);
-        int nodeID = parts[0];
-        idxs_.insert(nodeID);
-        parts.erase(parts.begin());
-        graph_[nodeID] = parts;
-        if (idx == file_length) { //number of pages with more than 100 links to it
-            break;
-        }
-        idx++;
+      if (idx == file_length) {
+          break;
+      }
+      std::getline(infile, line);
+      std::vector<int> parts;
+      SplitString(line, ',', parts);
+      int nodeID = parts[0];
+      idxs_.insert(nodeID);
+      parts.erase(parts.begin());
+      graph_[nodeID] = parts;
+      idx++;
     }
-  std::cout << graph_.size() << '\n';
-}   
+  // std::cout << graph_.size() << '\n';
+}
 
+/**
+ * Runs BFS using the given "seeds" as starting points and traveling a certain number of steps away from the seeds. 
+ * Nodes that are reached are added to the trimmed set.
+ * @param seeds a vector of the starting points for the BFS
+ * @param bound the number of steps to travel from each starting point
+ * @return a set of all nodes within "bound" distance from at least one of the seeds, can be used to trim a graph to a single connected component
+*/
 std::unordered_set<int> Graph::BFS_Trim(const std::vector<int>& seeds, int bound) {
-    static std::map<int, bool> visited;
-    static std::map<int, int> predecessor;
-    for (auto itr = idxs_.begin(); itr != idxs_.end(); itr++) {
-        visited[*itr] = false;
-    }
     std::unordered_set<int> trimmed;
     for (int id: seeds) {
-        BFS(visited, trimmed, predecessor, id, bound);
-        for (auto itr = idxs_.begin(); itr != idxs_.end(); itr++) {
-            visited[*itr] = false;
-        } 
+        BFS(trimmed, id, bound);
     }
     return trimmed;
 }
-void Graph::BFS(std::map<int, bool>& visited, std::unordered_set<int>& nodes, std::map<int, int>& predecessor, int start, int bound) {
-    //normal bfs if bound is less than 0, otherwise runs a certain number of steps away from the starting node
-  //returns nodes visited
+
+/**
+  * Helper function for BFS_Trim. Runs BFS given a starting index.
+  * Adds all nodes within a certain distance from the starting node to the set of trimmed nodes.
+  * @param nodes the set to insert the nodes to
+  * @param start the index of the starting node for the BFS
+  * @param bound the number of steps to go from the starting node in the BFS traversal
+*/
+void Graph::BFS(std::unordered_set<int>& nodes, int start, int bound) {
+  std::map<int, bool> visited;
+  for (auto itr = idxs_.begin(); itr != idxs_.end(); itr++) {
+        visited[*itr] = false;
+  }
   std::queue<int> q;
   std::map<int, int> distance;
   distance[start] = 0;
@@ -55,24 +71,25 @@ void Graph::BFS(std::map<int, bool>& visited, std::unordered_set<int>& nodes, st
       if (!visited[neighbor]) {
         distance[neighbor] = distance[v] + 1;
         visited[neighbor] = true;
-        predecessor[neighbor] = v;
         q.push(neighbor);
-        
+
       }
     }
   }
 }
 
-std::vector<int> Graph::getAdjacent(int idx) {
-    return graph_[idx];
-}
-std::map<int, int> Graph::shortest_paths(int start) {
-  static std::map<int, bool> visited;
-  static std::map<int, int> predecessor;
+/**
+  * Runs BFS given a starting index and returns predecessor matrix.
+  * @param start the starting index of the BFS
+  * @return a map (matrix) of each index to its predecessor in the BFS
+*/
+std::map<int, int>& Graph::BFS(int start) {
+  std::map<int, bool> visited;
+  static std::map<int, int> predecessor; //needs to be static to return by reference
   for (auto itr = idxs_.begin(); itr != idxs_.end(); itr++) {
     visited[*itr] = false;
   }
-
+  
   std::queue<int> q;
   std::map<int, int> distance;
 
@@ -93,24 +110,92 @@ std::map<int, int> Graph::shortest_paths(int start) {
   }
   return predecessor;
 }
+
+/**
+ * Wrapper function to access the adjacency list
+ * @param idx the index of the node
+ * @return a vector of the indexes of the nodes adjacent to the input node
+*/
+std::vector<int> Graph::getAdjacent(int idx) {
+    return graph_[idx];
+}
+
+/**
+ * runs Brandes algorithm on the graph. Used pseudocode from https://people.csail.mit.edu/jshun/6886-s19/lectures/lecture3-2.pdf
+ * @return a map storing the betweenness centrality of each node (maps index to betweeness centrality)
+*/
+std::map<int, double> &Graph::brandes_bfs() {
+  static std::map<int, double> C_b;
+  for (auto itr = idxs_.begin(); itr != idxs_.end(); itr++) {
+    std::map<int, double> sigma;
+    std::map<int, std::vector<int>> predecessor;
+    std::stack<int> s;
+    std::queue<int> q;
+    std::map<int, int> distance;
+    std::map<int, double> delta;
+    for (auto itrd = idxs_.begin(); itrd != idxs_.end(); itrd++) {
+      distance[*itrd] = -1;
+    }
+    q.push(*itr);
+    sigma[*itr] = 1;
+    distance[*itr] = 0;
+    while (!q.empty()) {
+      int v = q.front();
+      q.pop();
+      s.push(v);
+      for (int neighbor: graph_[v]) {
+        if (distance[neighbor] < 0) {
+          distance[neighbor] = distance[v] + 1;
+          q.push(neighbor);
+        }
+        if (distance[neighbor] == distance[v] + 1) {
+          sigma[neighbor] += sigma[v];
+          predecessor[neighbor].push_back(v);
+        }
+      }
+    }
+    while (!s.empty()) {
+      int w = s.front();
+      s.pop();
+      for (int v : predecessor[w]) {
+        delta[v] += (sigma[v] / sigma[w])*(1 + delta[w]);
+        if (*itr != w) {
+          C_b[w] += delta[w];
+        }
+      }
+    }
+  }
+  return C_b;
+}
+
+/**
+ * Loads a CSV of the Wikipedia titles for each index into a map. 
+ * Each line in the file should be of the form "index, titles"
+ * load_titles checks if the index is in the graph before adding it to the map of titles
+ * @param filename the name of the file with the CSV of titles
+ * @param graph the Graph that the titles are for
+ * @param file_length the length of the file (to help with termination of the while loop)
+ * @return a mapping of each index to its Wikipedia article name
+*/
 std::map<int,std::string>& load_titles(const std::string& filename, const Graph& graph, const int& file_length) {
     static std::map<int,std::string> titles;
     std::ifstream infile2(filename); //titles file
     std::string line;
     int idx = 0;
     while (infile2) {
-        idx++;
-        std::getline(infile2, line);
-        std::stringstream s_stream(line);
-        size_t pos = line.find(',');
-        int id = std::stoi(line.substr(0, pos));
-        line.erase(0, pos + 1);
-        if (graph.idxs_.find(id) != graph.idxs_.end()) {
-            titles[id] = line;
-        }
-        if (idx == file_length) { //number of titles
+      if (idx == file_length) {
             break;
-        }
+      }
+        
+      std::getline(infile2, line);
+      std::stringstream s_stream(line);
+      size_t pos = line.find(',');
+      int id = std::stoi(line.substr(0, pos));
+      line.erase(0, pos + 1);
+      if (graph.idxs_.find(id) != graph.idxs_.end()) {
+          titles[id] = line;
+      }
+      idx++;
     }
     return titles;
 }
