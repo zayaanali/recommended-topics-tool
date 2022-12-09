@@ -29,11 +29,23 @@ int main(int argc, char** argv) {
     std::cout << "You entered too many arguments. Please enter the indexes of two wikipedia pages" << '\n';
     return 0;
   }
-  int topic1 = std::stoi(argv[1]); //741034 -> piano
-  int topic2 = std::stoi(argv[2]); //605008 -> France
+
   Graph graph("../data/finaladj.txt", 15470);
-  betweenness = load_betweenness("../data/betweenness.txt", graph, 15470);
   std::map<int,std::string> titles = load_titles("../data/finaltitles.txt", graph, 15470);
+  std::map<std::string,int> reverse_titles = load_titles_reverse("../data/finaltitles.txt", graph, 15470);
+
+  if (reverse_titles.find(argv[1]) == reverse_titles.end()) {
+    std::cout << "The first argument is not a valid Wikipedia page title. Please try again." << '\n';
+    return 0;
+  }
+  if (reverse_titles.find(argv[2]) == reverse_titles.end()) {
+    std::cout << "The second argument is not a valid Wikipedia page title. Please try again." << '\n';
+    return 0;
+  }
+  int topic1 = reverse_titles[argv[1]]; //741034 -> piano
+  int topic2 = reverse_titles[argv[2]]; //605008 -> France
+  betweenness = load_betweenness("../data/betweenness.txt", graph, 15470);
+  
   std::map<int, std::vector<int>> predecessor = graph.brandes_predecessor(topic1);
   int current = topic2;
   std::vector<int> street;
@@ -47,6 +59,4 @@ int main(int argc, char** argv) {
   for (int stop: street) {
     std::cout << titles[stop] << '\n';
   }
-  
-  
 }

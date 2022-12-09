@@ -24,6 +24,7 @@ class Graph {
         std::map<int, double> brandes();
         std::map<int, std::vector<int>> brandes_predecessor(int start);
         friend std::map<int,std::string> load_titles(const std::string& filename, const Graph& graph, const int& file_length);
+        friend std::map<std::string,int> load_titles_reverse(const std::string& filename, const Graph& graph, const int& file_length);
         friend std::map<int,double> load_betweenness(const std::string& filename, const Graph& graph, const int& file_length);
         //SCC
         void getSCCs();
@@ -37,4 +38,5 @@ class Graph {
 };
 
 std::map<int,std::string> load_titles(const std::string& filename, const Graph& graph, const int& file_length);
+std::map<std::string, int> load_titles_reverse(const std::string& filename, const Graph& graph, const int& file_length);
 std::map<int,double> load_betweenness(const std::string& filename, const Graph& graph, const int& file_length);

@@ -211,9 +211,28 @@ std::map<int,std::string> load_titles(const std::string& filename, const Graph& 
       size_t pos = line.find(',');
       int id = std::stoi(line.substr(0, pos));
       line.erase(0, pos + 1);
-      if (graph.idxs_.find(id) != graph.idxs_.end()) {
-          titles[id] = line;
+      titles[id] = line;
+      idx++;
+    }
+    return titles;
+}
+
+std::map<std::string,int> load_titles_reverse(const std::string& filename, const Graph& graph, const int& file_length) {
+  std::map<std::string,int> titles;
+    std::ifstream infile2(filename); //titles file
+    std::string line;
+    int idx = 0;
+    while (infile2) {
+      if (idx == file_length) {
+            break;
       }
+      std::getline(infile2, line);
+      std::stringstream s_stream(line);
+      size_t pos = line.find(',');
+      int id = std::stoi(line.substr(0, pos));
+      line.erase(0, pos + 1);
+      line = line.substr(1, line.length() - 2);
+      titles[line] = id;
       idx++;
     }
     return titles;
