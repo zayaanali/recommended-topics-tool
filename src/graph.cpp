@@ -165,6 +165,35 @@ std::map<int, double> Graph::brandes() {
   return C_b;
 }
 
+std::map<int, std::vector<int>> brandes_predecessor() {
+  std::map<int, double> C_b;
+  for (auto itr = idxs_.begin(); itr != idxs_.end(); itr++) {
+    std::map<int, double> sigma;
+    std::map<int, std::vector<int>> predecessor;
+    std::queue<int> q;
+    std::map<int, intdefaultneg> distance; //intdefaultneg is a struct that holds an int initialized to -1
+    std::map<int, double> delta;
+    q.push(*itr);
+    sigma[*itr] = 1;
+    distance[*itr] = 0;
+    while (!q.empty()) {
+      int v = q.front();
+      q.pop();
+      for (int neighbor: graph_[v]) {
+        if (distance[neighbor] < 0) {
+          distance[neighbor] = distance[v] + 1;
+          q.push(neighbor);
+        }
+        if (distance[neighbor] == distance[v] + 1) {
+          sigma[neighbor] += sigma[v];
+          predecessor[neighbor].push_back(v);
+        }
+      }
+    }
+  }
+  return predecessor;
+}
+
 /**
  * Loads a CSV of the Wikipedia titles for each index into a map. 
  * Each line in the file should be of the form "index, titles"
