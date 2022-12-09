@@ -161,6 +161,7 @@ std::map<int, double> Graph::brandes() {
         }
       }
     }
+    counter++;
   }
   return C_b;
 }
