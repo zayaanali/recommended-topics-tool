@@ -22,7 +22,7 @@ class Graph {
         std::map<int, int>&  BFS(int start);
         std::vector<int> getAdjacent(int idx);
         std::map<int, double> brandes();
-        std::map<int, std::vector<int>> brandes_predecessor();
+        std::map<int, std::vector<int>> brandes_predecessor(int start);
         friend std::map<int,std::string>& load_titles(const std::string& filename, const Graph& graph, const int& file_length);
         //SCC
         void getSCCs();
