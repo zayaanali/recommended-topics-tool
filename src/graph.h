@@ -27,7 +27,7 @@ class Graph {
         friend std::map<std::string,int> load_titles_reverse(const std::string& filename, const Graph& graph, const int& file_length);
         friend std::map<int,double> load_betweenness(const std::string& filename, const Graph& graph, const int& file_length);
         //SCC
-        void getSCCs();
+        std::map<int, std::vector<int>> getSCCs();
         void dfs_1(int v, std::stack<int> &s);
         void dfs_2(int v, std::map<int, std::vector<int>> &SCCs, int &numComponents, std::map<int, std::vector<int>> &transpose);
     private:

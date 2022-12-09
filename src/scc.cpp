@@ -7,37 +7,11 @@ using std::map;
 using std::stack;
 using std::endl;
 
-/*
- * Pseudocode:
- * 1) DFS traversal in stack
- * 2) Find the transpose by reversing edges
- * 3) Pop nodes from stack and DFS transposed nodes
+/**
+ * Runs Kosaraju's algorithm on the graph to find connected components
+ * @return Returns a map mapping an index to each connected component
 */
-
-
-void Graph::getSCCs() {
-    
-    
-
-    graph_.clear();
-    graph_[0] = {1};
-    graph_[1] = {2};
-    graph_[2] = {0,3};
-    graph_[3] = {4};
-    graph_[4] = {5};
-    graph_[5] = {6};
-    graph_[6] = {7,4};
-    graph_[7] = {};
-
-
-    // for (auto const& [key, val] : graph_) {
-    //     std::cout << key << ": ";  
-    //     for (auto it: val) {
-    //         cout << it << " ";
-    //     }
-    //     cout << std::endl;
-    // }
-    
+map<int, vector<int>> Graph::getSCCs() {
     int numComponents=0; // number of strongly connected components
     stack<int> s;
     map<int, vector<int>> SCCs; // adjacency list of SCCs
@@ -59,15 +33,6 @@ void Graph::getSCCs() {
             transpose[src].push_back(dest);
         }
     }
-    // cout << "Transpose" << endl;
-    // for (auto const& [key, val] : transpose) {
-    //     std::cout << key << ": ";  
-    //     for (auto it: val) {
-    //         cout << it << " ";
-    //     }
-    //     cout << std::endl;
-    // }
-
     // reset visited array to false
     for (size_t i=0; i<100; i++)
         visited_[i]=false;
@@ -78,23 +43,17 @@ void Graph::getSCCs() {
         s.pop();
 
         if (!visited_[v]) {
-            cout << "Component " << numComponents << ": ";
             dfs_2(v, SCCs, numComponents, transpose); // prints all the CCs
             numComponents++;
-            cout << "\n";
         }
     }
-    
-    
-    cout << "SCC" << endl;
     for (auto const& [key, val] : SCCs) {
         std::cout << key << ": ";  
         for (auto it: val) {
             cout << it << " ";
         }
-        cout << std::endl;
     }
-    cout << "Number of Components: " << numComponents << endl;
+    return SCCs;
 }
 
 // DFS traversal order
@@ -120,7 +79,7 @@ void Graph::dfs_2(int v, map<int, vector<int>> &SCCs,  int &numComponents, map<i
     cout << v << " ";
     SCCs[numComponents].push_back(v); // add connected component
     visited_[v]=true;
-    
+
     // continue DFS on transposed graph
     for (size_t i=0; i<transpose[v].size(); i++) {
         if (!visited_[transpose[v][i]])
