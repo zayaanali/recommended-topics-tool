@@ -161,9 +161,34 @@ std::map<int, double> Graph::brandes() {
         }
       }
     }
-    counter++;
   }
   return C_b;
+}
+
+std::map<int, std::vector<int>> brandes_predecessor(int start) {
+  std::map<int, double> sigma;
+  std::map<int, std::vector<int>> predecessor;
+  std::queue<int> q;
+  std::map<int, intdefaultneg> distance; //intdefaultneg is a struct that holds an int initialized to -1
+  std::map<int, double> delta;
+  q.push(start);
+  sigma[start] = 1;
+  distance[start] = 0;
+  while (!q.empty()) {
+    int v = q.front();
+    q.pop();
+    for (int neighbor: graph_[v]) {
+      if (distance[neighbor] < 0) {
+        distance[neighbor] = distance[v] + 1;
+        q.push(neighbor);
+      }
+      if (distance[neighbor] == distance[v] + 1) {
+        sigma[neighbor] += sigma[v];
+        predecessor[neighbor].push_back(v);
+      }
+    }
+  }
+  return predecessor;
 }
 
 /**
@@ -197,3 +222,4 @@ std::map<int,std::string>& load_titles(const std::string& filename, const Graph&
     }
     return titles;
 }
+>>>>>>> 208e2089bab120231b03c9be8ba3c84a3cf61c7c
