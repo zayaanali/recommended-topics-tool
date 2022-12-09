@@ -12,7 +12,7 @@
 #include "graph.h"
 /** bfs_trim.cpp
   * fourth and final step in data parsing pipeline
-  * Trims down the initially filtered 130K nodes to a single connected graph of around ~46K
+  * Trims down the initially filtered 24K nodes to a single connected graph of around ~15K
   * Runs BFS_trim with 3 seeds. 
   * BFS will start at the 3 seeds ("US", "animal", and "food") and travel up to 2 steps away from the node
   * All nodes that are reached are added to the final set of nodes
@@ -22,8 +22,8 @@
 int main() {
   static std::map<int,std::string> titles;
   std::unordered_set<int> trimmed;
-  Graph graph("../data/filteredadj.txt", 131511);
-  titles = load_titles("../data/filteredtitles.txt", graph, 131511);
+  Graph graph("../data/filteredadj.txt", 23757);
+  titles = load_titles("../data/filteredtitles.txt", graph, 23757);
   std::vector<int> topten = {2038044, 3846441, 423902}; //United States, Animal, Food (3 general topics)
   trimmed = graph.BFS_Trim(topten, 2);
   std::cout << trimmed.size() << '\n';

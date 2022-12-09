@@ -10,8 +10,8 @@
 
 /** filter_edges.cpp
  * second step in data parsing pipeline
- * creates and stores an adjacency list with only the top 130K nodes from the Wikipedia data set
- * Uses the edges file and the list of top 130K nodes from "filter_data.cpp" to create the adjacency list
+ * creates and stores an adjacency list with only the top 24K nodes from the Wikipedia data set
+ * Uses the edges file and the list of top 24K nodes from "filter_data.cpp" to create the adjacency list
  * writes out output to "filteredadj.txt" as a csv where each line has the index of the node followed by all the nodes it is adjacent to
 */
 int main() {
@@ -27,7 +27,7 @@ int main() {
   std::string line;
   int idx = 0;
   while (infile) {
-    if (idx == 131511) { //length of file
+    if (idx == 23757) { //length of file
       break;
     }
     std::getline(infile, line);

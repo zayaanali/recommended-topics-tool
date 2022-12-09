@@ -26,7 +26,7 @@ int main() {
   std::string line;
   int idx = 0;
   while (infile) {
-    if (idx == 131511) { //length of the "filteredadj.txt" file
+    if (idx == 23757) { //length of the "filteredadj.txt" file
       break;
     }
     std::getline(infile, line);

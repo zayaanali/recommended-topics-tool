@@ -9,7 +9,7 @@
 
 /** filter_data.cpp
  * first step in data parsing pipeline
- * finds the top 130K nodes (nodes with the highest in-degree) from the downloaded data set of Wikipedia pages (Stanford Large Network Dataset Collection) and writes them to a file
+ * finds the top 24K nodes (nodes with the highest in-degree) from the downloaded data set of Wikipedia pages (Stanford Large Network Dataset Collection) and writes them to a file
  * writes output to "filteredwiki.txt"
  * each line in the output file has the node index followed by its title
  * output is sorted by highest in-degree (line 1 will be the node with the most links to it)
@@ -45,7 +45,7 @@ int main() {
     log[to]++;
   }
   for (auto i = log.begin(); i != log.end(); i++) {
-    if (i->second > 100) {
+    if (i->second > 450) {
       filtered.push_back(std::make_pair(i->first, i->second));
       std::cout << i->first << ' ' << i->second << '\n';
     }
@@ -60,6 +60,6 @@ int main() {
     Writing << i.first << ',' << titles[i.first] << '\n';
   }
   Writing.close();
-  std::cout << "SIZE OF FILTERED IS: " << filtered.size() << '\n';
+  std::cout << "SIZE OF FILTERED IS: " << filtered.size() - 1 << '\n';
   
 }

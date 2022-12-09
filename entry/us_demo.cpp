@@ -18,8 +18,8 @@
 
 int main() {
   static std::map<int,std::string> titles;
-  Graph graph("../data/finaladj.txt", 46367);
-  titles = load_titles("../data/finaltitles.txt", graph, 46367);
+  Graph graph("../data/finaladj.txt", 29992);
+  titles = load_titles("../data/finaltitles.txt", graph, 29992);
   std::map<int, int> predecessor = graph.BFS(2038044);
   while (true) {
     std::cout << "Search: ";
