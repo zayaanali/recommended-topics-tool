@@ -83,9 +83,9 @@ void Graph::BFS(std::unordered_set<int>& nodes, int start, int bound) {
   * @param start the starting index of the BFS
   * @return a map (matrix) of each index to its predecessor in the BFS
 */
-std::map<int, int>& Graph::BFS(int start) {
+std::map<int, int> Graph::BFS(int start) {
   std::map<int, bool> visited;
-  static std::map<int, int> predecessor; //needs to be static to return by reference
+  std::map<int, int> predecessor;
   for (auto itr = idxs_.begin(); itr != idxs_.end(); itr++) {
     visited[*itr] = false;
   }
@@ -165,14 +165,11 @@ std::map<int, double> Graph::brandes() {
   return C_b;
 }
 
-std::map<int, std::vector<int>> brandes_predecessor(int start) {
-  std::map<int, double> sigma;
+std::map<int, std::vector<int>> Graph::brandes_predecessor(int start) {
   std::map<int, std::vector<int>> predecessor;
   std::queue<int> q;
   std::map<int, intdefaultneg> distance; //intdefaultneg is a struct that holds an int initialized to -1
-  std::map<int, double> delta;
   q.push(start);
-  sigma[start] = 1;
   distance[start] = 0;
   while (!q.empty()) {
     int v = q.front();
@@ -183,7 +180,6 @@ std::map<int, std::vector<int>> brandes_predecessor(int start) {
         q.push(neighbor);
       }
       if (distance[neighbor] == distance[v] + 1) {
-        sigma[neighbor] += sigma[v];
         predecessor[neighbor].push_back(v);
       }
     }
@@ -200,8 +196,8 @@ std::map<int, std::vector<int>> brandes_predecessor(int start) {
  * @param file_length the length of the file (to help with termination of the while loop)
  * @return a mapping of each index to its Wikipedia article name
 */
-std::map<int,std::string>& load_titles(const std::string& filename, const Graph& graph, const int& file_length) {
-    static std::map<int,std::string> titles;
+std::map<int,std::string> load_titles(const std::string& filename, const Graph& graph, const int& file_length) {
+    std::map<int,std::string> titles;
     std::ifstream infile2(filename); //titles file
     std::string line;
     int idx = 0;
@@ -222,4 +218,22 @@ std::map<int,std::string>& load_titles(const std::string& filename, const Graph&
     }
     return titles;
 }
->>>>>>> 208e2089bab120231b03c9be8ba3c84a3cf61c7c
+std::map<int,double> load_betweenness(const std::string& filename, const Graph& graph, const int& file_length) {
+  std::map<int,double> betweenness;
+  std::ifstream infile2(filename); //titles file
+  std::string line;
+  int idx = 0;
+  while (infile2) {
+    if (idx == file_length) {
+          break;
+    }
+    std::getline(infile2, line);
+    std::stringstream s_stream(line);
+    size_t pos = line.find(',');
+    int id = std::stoi(line.substr(0, pos));
+    line.erase(0, pos + 1);
+    betweenness[id] = stod(line);
+    idx++;
+  }
+  return betweenness;
+}
