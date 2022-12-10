@@ -39,6 +39,7 @@ cd build
 cmake ..
 make
 ```
+## Data Parsing and Trimming
 Warning: For these following data parsing steps, the runtime is quite long so to save time, the parsed files titled "finaladj.txt", "finaltitles.txt", and "betweenness.txt" are also provided at this link (these 3 are the only files necessary to run the main algorithms in this program) and can be directly downloaded and placed into the "data" folder: [Here](https://drive.google.com/drive/folders/1D4qHG6QAGv98keLUF5j7drPEF9_2byoq?usp=sharing)<br>
 If the user chooses to save time by downloading from the provided link, these next steps for parsing and preprocessing can be ignored; otherwise, proceed with the following steps to manually run the terminal commands for parsing and preprocessing.
 Now that the build files have been created, the first step is to run the data parsing and preprocessing commands in the same order as follows:<br>
@@ -52,6 +53,7 @@ Now that the build files have been created, the first step is to run the data pa
 To verify that these steps have been completed properly, check the "data" folder that was created and verify that the following files have been added to this folder:<br>
 "filteredwiki.txt", "filteredadj.txt", "filteredtitles.txt", "finaladj.txt", "finaltitles.txt", "betweenness.txt"<br>
 The data parsing and preprocessing is now complete, either by choosing to download from the google drive link as mentioned before or by manually running the terminal commands mentioned above.
+## Using the Related Topics Tool
 Next, to find a shared Wikipedia page output for two input Wikipedia page indexes, run the following where topic1 and topic2 are strings that the user can select by opening the "finaltitles.txt" in the "data" folder. We recommend using a "ctrl-f" in the "finaltitles.txt" folder to find the exact formatting of the topic of interest (e.g. "ctrl-f" for "Beethoven" and use "Ludwig van Beethoven" as the command line argument):
 ```
 ./related_topics_two_inputs topic1 topic2
