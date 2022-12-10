@@ -62,7 +62,7 @@ For example, a user input of<br>
 ```
 ./related_topics_two_inputs "Italy" "Food"
 ```
-<br>will yield a result of "Emilia-Romagna". This is a region in Italy known for its culinary cuisine.
+<br>will yield a result of "Emilia-Romagna". This is a region in Italy known for its culinary cuisine. Make sure that the command line arguments are wrapped in quotation marks, as this allows for strings with multiple words.
 <br>NEED TO ADD STRONGLY CONNECTED COMPONENTS HERE
 
 ## Testing
