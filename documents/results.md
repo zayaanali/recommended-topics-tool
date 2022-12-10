@@ -2,7 +2,7 @@
 ### Results
 ---
 Overall, we were able to complete most of the goals we set out to, however we ran into some issues with the output of one of our algorithms
-##### Our deliverables
+#### Our deliverables
    * Our makefiles runs as expected
    * We properly read in our wikipedia set and built a graph based on it
    * We have thoroughly tested our graph and algorithms for bugs and memory leaks
@@ -23,7 +23,7 @@ Overall, we were able to complete most of the goals we set out to, however we ra
     	* This algorithm was therefore unable to provide us with any useful recommendation since nearly the entire dataset is strongly connected
 
 
-* #### Example results:
+#### Example results:
 ```
 insert results here
 ```
