@@ -6,7 +6,7 @@
 The video presentation for this project can be found here:
 
 ## Introduction
-This project uses Stanford's English Wikipedia Hyperlink Network dataset to create a related topics tool. The following algorithms are used to generate related topics:
+This goal of this project was to use the Stanford English Wikipedia Hyperlink Network dataset to create a related topics recommendation tool. Either one or two input articles can be accepted, and the following algorithms were used to find a related topic:
 * Graph Breadth-First-Search Algorithm
 * Brandes Unweighted Shortest Path & Betweeness Centrality Algorithm
 * Kosaraju's Strongly Connected Components Algorithm
