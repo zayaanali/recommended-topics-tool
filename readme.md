@@ -16,13 +16,19 @@ The video presentation for this project can be found here:
 ## Installation
 The first step in the installation of this project is to create a folder on the user's local computer 
 that contains the provided CS225 Dockerfile and .devcontainer folder with the "devcontainer" JSON file inside of 
-it to duplicate the CS225 environment. The user must now run the following command in this newly created folder: 
+it to duplicate the CS225 environment. The user must now run the following command in this newly created folder:<br>
+``` 
 git clone https://github.com/zayaanali/cs225-final-project.git
-<br>Next, navigate into the newly cloned folder in the terminal that contains the source code from the git repository by running the following:
+```
+Next, navigate into the newly cloned folder in the terminal that contains the source code from the git repository by running the following:<br>
+```
 cd cs225-final-project
-Create a new folder titled "data" by running the following after having completed the previous step:
+```
+Create a new folder titled "data" by running the following after having completed the previous step:<br>
+```
 mkdir data
-<br>Download the two zip files at the following link: [Link to these 2 zip files](https://snap.stanford.edu/data/enwiki-2013.html)<br>
+```
+Download the two zip files at the following link: [Here](https://snap.stanford.edu/data/enwiki-2013.html)<br>
 Drag the downloaded files titled "wikidata.txt" and "enwiki-2013-names.txt" into this newly created "data" folder.
 
 ## How to Build
@@ -31,10 +37,12 @@ Once the installation is complete, ensure that you are inside the "cs225-final-p
 mkdir build
 cd build
 cmake ..
+make
 ```
+Warning: For these following data parsing steps, the runtime is quite long so to save time, the parsed files titled "finaladj.txt", "finaltitles.txt", and "betweenness.txt" are also provided at this link (these 3 are the only files necessary to run the main algorithms in this program) and can be directly downloaded and placed into the "data" folder: [Here](https://drive.google.com/drive/folders/1D4qHG6QAGv98keLUF5j7drPEF9_2byoq?usp=sharing)<br>
+If the user chooses to save time by downloading from the provided link, these next steps for parsing and preprocessing can be ignored; otherwise, proceed with the following steps to manually run the terminal commands for parsing and preprocessing.
 Now that the build files have been created, the first step is to run the data parsing and preprocessing commands in the same order as follows:<br>
 ```
-make
 ./filter_data
 ./filter_edges
 ./filter_titles
@@ -43,7 +51,7 @@ make
 ```
 To verify that these steps have been completed properly, check the "data" folder that was created and verify that the following files have been added to this folder:<br>
 "filteredwiki.txt", "filteredadj.txt", "filteredtitles.txt", "finaladj.txt", "finaltitles.txt", "betweenness.txt"<br>
-Warning: For these data parsing steps, the runtime is quite long so to save time, the parsed files titled "finaladj.txt", "finaltitles.txt", and "betweenness.txt" are also provided at this link (these 3 are the only files necessary to run the main algorithms in this program) and can be directly downloaded and placed into the "data" folder: [Link to these 3 data files](https://drive.google.com/drive/folders/1D4qHG6QAGv98keLUF5j7drPEF9_2byoq?usp=sharing)<br>
+The data parsing and preprocessing is now complete, either by choosing to download from the google drive link as mentioned before or by manually running the terminal commands mentioned above.
 Next, to find a shared Wikipedia page output for two input Wikipedia page indexes, run the following where topic1 and topic2 are strings that the user can select by opening the "finaltitles.txt" in the "data" folder:
 ```
 ./related_topics_two_inputs topic1 topic2
