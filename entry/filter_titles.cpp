@@ -14,7 +14,7 @@
   * third step in data parsing pipeline
   * filters the titles CSV file for each index based on "filteredadj.txt" (generated from "filter_data.cpp")
   * creates a new titles csv file with only the nodes that were kept after filtering
-  * used to generate "reducedtitles.txt"
+  * used to generate "filteredtitles.txt"
 */
 int main() {
   static std::map<int, std::vector<int>> adj;
