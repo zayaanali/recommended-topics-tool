@@ -5,6 +5,13 @@
 ## Video Presentation
 The video presentation for this project can be found here:
 
+## Introduction
+This project uses Stanford's English Wikipedia Hyperlink Network dataset to create a related topics tool. The following algorithms are used to generate related topics:
+* Graph Breadth-First-Search Algorithm
+* Brandes Unweighted Shortest Path & Betweeness Centrality Algorithm
+* Kosaraju's Strongly Connected Components Algorithm
+
+
 ## Documentation
 * Link to Team Contract
     * [Here](https://github.com/zayaanali/cs225-final-project/blob/main/documents/contract.md)
@@ -76,6 +83,14 @@ The tests being ran along with the sample .txt files that are being used as the 
 ## Description/Features
 
 ## Project Structure
+
+**Algorithms Namespace**
+* Graph Breadth-First-Search Algorithm
+* Brandes Unweighted Shortest Path & Betweeness Centrality Algorithm
+* Kosaraju's Strongly Connected Components Algorithm
+
+**Graph Class**
+* Adjacency List Graph Implementation
 
 
 
