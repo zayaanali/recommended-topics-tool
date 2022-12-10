@@ -6,42 +6,24 @@ Overall, we were able to complete most of the goals we set out to, however we ra
     * Our makefiles runs as expected
     * We properly read in our wikipedia set and built a graph based on it
     * We have thoroughly tested our graph and algorithms for bugs and memory leaks
-    * Inputting two wikipedia pages provides 
+    * 2 Wikipedia page input outputs page related to both results
+    * 1 Wikipedia page recommendations are too large to be useful
+    	* see Kosaraju's algorithm for more details	 
 * #### Algorithms & Traversals
-    * Our BFS traversal handles appopriately, and even continues to work in a disconnected graph
-    * Our Dijkstra's algorithm returns the shortest path from A to B and is handled; it is often very short
-    * Our PageRank algorithm is implemented appropriately; the top 3 ranks from our set are: United_States, France, & Europe
-* #### Implementations
-    * We have decomposed our project into a Graph class, and an Alg namespace, where our static functions algorithm functions are located.
-    * Where possible, we have observed good programming habits; this may be through DRY, git, documentation, and etc.
+    * Dataset trimming
+    	* Trimmed dataset from 4 million nodes and 100 million edges to top 24 thousand with highest in-degree
+    	* Ran BFS on three seed nodes, terminated two steps from seed
+    	* Filtered out discarded nodes and output adjacency list to file in CSV format with 15.5 thousand nodes and about 952 thousand edges
+    * Used Brandes Betweeness Centrality algorithm to determine the betweeness centrality of each wikipedia page in the trimmed dataset
+    	* output placed in CSV that can be loaded into a map to avoid expensive algorithm cost 
+    	* Used the CSV to get related article for 2 page input	 
+    * Used Kosaraju's Algorithm to find all of the strongly connected components in the trimmed dataset
+    	* consisted of first finding the DFS traversal of the graph, then running DFS again on the transpose of the original graph in the order of the original DFS
+    	* Output resulted in nearly the all nodes being strongly connected (15.2k nodes)
+    	* This algorithm was therefore unable to provide us with any useful recommendation since nearly the entire dataset is strongly connected
 
 
 * #### Example results:
 ```
-// PageRank results; we found these results exceptionally interesting! The numbers represent the probability someone would land on that page from a random starting page
-        United_States: 0.956482%
-		France: 0.644452%
-		Europe: 0.635166%
-		United_Kingdom: 0.624720%
-		English_language: 0.487520%
-		Germany: 0.483599%
-```
-```
-// Dijkstra's result; source and destination are randomized
-    Starting from: Coal	 Going to: Special_relativity
-			Step 0: Coal to 13th_century
-			Step 1: 13th_century to Time
-			Step 2: Time to Special_relativity
-```
-```
-// A snippet of BFS; starting point randomized
-    Starting from: Coal
-			Step 0: Coal
-			Step 1: 13th_century
-			Step 2: Acid_rain
-            . . . 
-            Step 4588: Yotsuya_Kaidan
-			Step 4589: You're_Still_the_One
-			Step 4590: Yungay,_Peru
-			End Step 4591: Zara_Yaqob
+insert results here
 ```
