@@ -1,6 +1,17 @@
 # CS225 Final Project
 
-## Team Members: zaali2, aswar3, shyammt2 , bchang
+## Team Members: zaali2, aswar3, shyammt2, bchang
+
+## Video Presentation
+The video presentation for this project can be found here:
+
+## Documentation
+* Link to Team Contract
+    * [Here](https://github.com/zayaanali/cs225-final-project/blob/main/documents/contract.md)
+* Link to Project Proposal
+    * [Here](https://github.com/zayaanali/cs225-final-project/blob/main/documents/proposal.md)
+* Link to Development Logs
+    * [Here](https://github.com/zayaanali/cs225-final-project/blob/main/documents/devlog.md)
 
 ## Installation
 The first step in the installation of this project is to create a folder on the user's local computer 
@@ -52,7 +63,9 @@ make test
 ```
 The tests being ran along with the sample .txt files that are being used as the testing input files can be found within the "tests" folder in the main directory, "cs225-final-project".
 
-## Description
+## Description/Features
+
+## Project Structure
 
 
 
