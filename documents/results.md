@@ -14,7 +14,7 @@ Overall, we were able to complete most of the goals we set out to, however we ra
       * Trimmed dataset from 4 million nodes and 100 million edges to top 24 thousand with highest in-degree
       * Ran BFS on three seed nodes, terminated two steps from seed
       * Filtered out discarded nodes and output adjacency list to file in CSV format with 15.5 thousand nodes and about 952 thousand edges
-      * Used Brandes Betweeness Centrality algorithm to determine the betweeness centrality of each wikipedia page in the trimmed dataset
+   * Used Brandes Betweeness Centrality algorithm to determine the betweeness centrality of each wikipedia page in the trimmed dataset
       * output placed in CSV that can be loaded into a map to avoid expensive algorithm cost 
       * Used the CSV to get related article for 2 page input	 
    * Used Kosaraju's Algorithm to find all of the strongly connected components in the trimmed dataset
