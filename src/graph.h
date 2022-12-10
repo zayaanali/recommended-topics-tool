@@ -7,6 +7,7 @@
 #include <sstream>
 #include <fstream>
 #include <stack>
+#include <algorithm>
 
 
 class Graph {
@@ -34,7 +35,8 @@ class Graph {
         std::unordered_set<int> idxs_;
         // SCC
         std::map<int, std::vector<int>> graph_;
-        std::vector<bool> visited_;
+        //std::map<int, std::vector<int>> stronggraph_; //an edge exists between two nodes only if both pages link to each other
+        std::map<int, bool> visited_; //default value is false
 };
 
 std::map<int,std::string> load_titles(const std::string& filename, const Graph& graph, const int& file_length);

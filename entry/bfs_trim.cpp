@@ -29,12 +29,14 @@ int main() {
   std::cout << trimmed.size() << '\n';
   std::ofstream Writing("../data/finaladj.txt");
   std::ofstream Writing2("../data/finaltitles.txt");
+  int edges = 0;
   for (auto itr = trimmed.begin(); itr != trimmed.end(); itr++) {
     Writing2 << *itr << ',' << titles[*itr] << '\n'; //writes out the final 40K titles
     std::vector<int> adjacent = graph.getAdjacent(*itr);
     std::vector<int> newadj;
     for (int v: adjacent) {
       if (trimmed.find(v) != trimmed.end()) {
+        edges++;
         newadj.push_back(v);
       }
     }
@@ -50,4 +52,5 @@ int main() {
   Writing.close();
   
   Writing2.close();
+  std::cout << edges << '\n';
 }

@@ -25,6 +25,17 @@ Graph::Graph(const std::string& filename, const int& file_length) {
       graph_[nodeID] = parts;
       idx++;
     }
+
+    //creates a graph where nodes are only linked if an edge exists going both ways between the nodes.
+    // for (auto itr = idxs_.begin(); itr != idxs_.end(); itr++) {
+    //   std::vector<int> newadj;
+    //   for (int v: graph_[*itr]) {
+    //     if (std::find(graph_[v].begin(), graph_[v].end(), *itr) != graph_[v].end()) {
+    //       newadj.push_back(v);
+    //     }
+    //   }
+    //   stronggraph_[*itr] = newadj;
+    // }
   // std::cout << graph_.size() << '\n';
 }
 
@@ -52,9 +63,9 @@ std::unordered_set<int> Graph::BFS_Trim(const std::vector<int>& seeds, int bound
 */
 void Graph::BFS(std::unordered_set<int>& nodes, int start, int bound) {
   std::map<int, bool> visited;
-  for (auto itr = idxs_.begin(); itr != idxs_.end(); itr++) {
-        visited[*itr] = false;
-  }
+  // for (auto itr = idxs_.begin(); itr != idxs_.end(); itr++) {
+  //       visited[*itr] = false;
+  // }
   std::queue<int> q;
   std::map<int, int> distance;
   distance[start] = 0;
@@ -86,9 +97,9 @@ void Graph::BFS(std::unordered_set<int>& nodes, int start, int bound) {
 std::map<int, int> Graph::BFS(int start) {
   std::map<int, bool> visited;
   std::map<int, int> predecessor;
-  for (auto itr = idxs_.begin(); itr != idxs_.end(); itr++) {
-    visited[*itr] = false;
-  }
+  // for (auto itr = idxs_.begin(); itr != idxs_.end(); itr++) {
+  //   visited[*itr] = false;
+  // }
   
   std::queue<int> q;
   std::map<int, int> distance;
