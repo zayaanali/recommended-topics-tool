@@ -52,9 +52,6 @@ std::unordered_set<int> Graph::BFS_Trim(const std::vector<int>& seeds, int bound
 */
 void Graph::BFS(std::unordered_set<int>& nodes, int start, int bound) {
   std::map<int, bool> visited;
-  // for (auto itr = idxs_.begin(); itr != idxs_.end(); itr++) {
-  //       visited[*itr] = false;
-  // }
   std::queue<int> q;
   std::map<int, int> distance;
   distance[start] = 0;
