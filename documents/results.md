@@ -46,6 +46,7 @@ Some potential ways to improve our algorithm could be:
 #### Example Results:
 
 **BFS**
+
 The output of BFS was just the trimmed and parsed dataset files that were mentioned in the "Data Parsing and Trimming" section of the readme.md file, which is linked here: [Here](https://github.com/zayaanali/cs225-final-project/blob/main/readme.md)
 
 **Brandes**
@@ -59,6 +60,8 @@ Top 6 nodes with highest betweenness centrality (all had centrality scores > 10,
 * India
 * New York City
 ```
+
+**Related topics**
 ```
 Inputs: Skiing, Germany
 Output: Alps, Norway, Snowboarding
@@ -84,4 +87,4 @@ Output: Diabetes mellitus type 2
 <br>
 ![Kosaraju Output](images/kosaraju_result.png)
 <br>
-The number 5 describes the number of strongly connected components present in the graph. The number after for example "0:" which is 15466 describes how large the component is or what size it is.
+After running Kosaraju's on the Wikipedia graph, we printed out the number of strongly connected components and the size of each component. The number 5 describes the number of strongly connected components present in the graph. The number after for example "0:" which is 15466 describes how large the component is or what size it is.
