@@ -68,7 +68,7 @@ To verify that these steps have been completed properly, check the "data" folder
 "filteredwiki.txt", "filteredadj.txt", "filteredtitles.txt", "finaladj.txt", "finaltitles.txt", "betweenness.txt"<br>
 The data parsing and preprocessing is now complete, either by choosing to download from the google drive link as mentioned before or by manually running the terminal commands mentioned above.
 ## Using the Related Topics Tool
-Next, to find a shared Wikipedia page output for two input Wikipedia page indexes, run the following where topic1 and topic2 are strings that the user can select by opening the "finaltitles.txt" in the "data" folder. We recommend using a "ctrl-f" in the "finaltitles.txt" folder to find the exact formatting of the topic of interest (e.g. "ctrl-f" for "Beethoven" and use "Ludwig van Beethoven" as the command line argument):
+Next, to find a shared Wikipedia page output for two input Wikipedia page indexes, run the following where topic1 and topic2 are strings that the user can select by opening the "finaltitles.txt" in the "data" folder. We recommend using a "ctrl-f" in the "finaltitles.txt" to find the exact formatting of the topic of interest (e.g. "ctrl-f" for "Beethoven" and use "Ludwig van Beethoven" as the command line argument):
 ```
 ./related_topics_two_inputs topic1 topic2
 ```
