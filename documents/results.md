@@ -35,14 +35,14 @@ Top 6 nodes with highest betweenness centrality (all had centrality scores > 10,
 ```
 ```
 Inputs: Skiing, Germany
-<br>Output: Alps, Norway, Snowboarding
+Output: Alps, Norway, Snowboarding
 ```
 ```
 Inputs: United States, Piano
-<br>Output: Western Culture, Country Music, Blues
+Output: Western Culture, Country Music, Blues
 ```
 ```
 Inputs: Clarinet, Leonard Bernstein
-<br>Output: Saxophone, Gustave Mahler, Benny Goodman
+Output: Saxophone, Gustave Mahler, Benny Goodman
 ```
 
