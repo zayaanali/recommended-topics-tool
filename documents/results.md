@@ -3,7 +3,7 @@
 ---
 Overall, we were able to complete most of the goals we set out to, however we ran into some issues with the output of one of our algorithms
 #### Our deliverables
-   * Our makefiles runs as expected
+   * Our makefiles run as expected
    * We properly read in our wikipedia set and built a graph based on it
    * We have thoroughly tested our graph and algorithms for bugs and memory leaks
    * 2 Wikipedia page input outputs page related to both results
@@ -25,5 +25,24 @@ Overall, we were able to complete most of the goals we set out to, however we ra
 
 #### Example results:
 ```
-insert results here
+Top 6 nodes with highest betweenness centrality (all had centrality scores > 10,000,000)
+* United States
+* France
+* United Kingdom
+* World War II
+* India
+* New York City
 ```
+```
+Inputs: Skiing, Germany
+<br>Output: Alps, Norway, Snowboarding
+```
+```
+Inputs: United States, Piano
+<br>Output: Western Culture, Country Music, Blues
+```
+```
+Inputs: Clarinet, Leonard Bernstein
+<br>Output: Saxophone, Gustave Mahler, Benny Goodman
+```
+
