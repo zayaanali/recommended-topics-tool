@@ -5,15 +5,15 @@
  * Constructor to read an file with a comma separated adjacency list (each line has the index followed by the indexes of all the adjacent nodes) and store it in a map adjacency list 
  * Node indexes are also stored in a set 
  * @param filename the name of the file with the comma separated adjacency list
- * @param file_length the length of the file to help with the termination of the while loop
+ * @param num_vertices the number of vertices in the graph, should be equivalent to file length
 */
-Graph::Graph(const std::string& filename, const int& file_length) {
+Graph::Graph(const std::string& filename, const int& num_vertices) {
     std::ifstream infile(filename); //edge file
     //load adj list
     std::string line;
     int idx = 0;
     while (infile) {
-      if (idx == file_length) {
+      if (idx == num_vertices) {
           break;
       }
       std::getline(infile, line);
@@ -203,7 +203,7 @@ std::map<int, std::vector<int>> Graph::brandes_predecessor(int start) {
  * load_titles checks if the index is in the graph before adding it to the map of titles
  * @param filename the name of the file with the CSV of titles
  * @param graph the Graph that the titles are for
- * @param file_length the length of the file (to help with termination of the while loop)
+ * @param file_length the number of vertices in the graph/length of file
  * @return a mapping of each index to its Wikipedia article name
 */
 std::map<int,std::string> load_titles(const std::string& filename, const Graph& graph, const int& file_length) {
@@ -244,7 +244,7 @@ std::map<int,std::string> load_titles(const std::string& filename, const Graph& 
  * Each line in the file should be of the form "title, index"
  * @param filename the name of the file with the CSV of titles
  * @param graph the Graph that the titles are for
- * @param file_length the length of the file (to help with termination of the while loop)
+ * @param file_length the number of vertices in the graph/length of file
  * @return a mapping of each Wikipedia article title to its index
 */
 std::map<std::string,int> load_titles_reverse(const std::string& filename, const Graph& graph, const int& file_length) {
@@ -284,7 +284,7 @@ std::map<std::string,int> load_titles_reverse(const std::string& filename, const
  * Each line in the file should be of the form "index, betweenness centrality"
  * @param filename the name of the file with the CSV of titles
  * @param graph the Graph that the titles are for
- * @param file_length the length of the file (to help with termination of the while loop)
+ * @param file_length the number of vertices in the graph/length of file
  * @return a mapping of each index to its betweenness centrality
 */
 std::map<int,double> load_betweenness(const std::string& filename, const Graph& graph, const int& file_length) {
