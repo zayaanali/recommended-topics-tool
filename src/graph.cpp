@@ -176,12 +176,18 @@ std::map<int, double> Graph::brandes() {
   return C_b;
 }
 
+/**
+ * runs BFS to find all shortest paths to the "start" node
+ * @param start the vertex to find shortest paths to
+ * @return a map storing predecessors of each vertex on the shortest path to "start"
+*/
 std::map<int, std::vector<int>> Graph::brandes_predecessor(int start) {
   std::map<int, std::vector<int>> predecessor;
   std::queue<int> q;
   std::map<int, intdefaultneg> distance; //intdefaultneg is a struct that holds an int initialized to -1
   q.push(start);
   distance[start] = 0;
+  //BFS
   while (!q.empty()) {
     int v = q.front();
     q.pop();
@@ -200,7 +206,7 @@ std::map<int, std::vector<int>> Graph::brandes_predecessor(int start) {
 
 /**
  * Loads a CSV of the Wikipedia titles for each index into a map. 
- * Each line in the file should be of the form "index, titles"
+ * Each line in the file should be of the form "index, title"
  * load_titles checks if the index is in the graph before adding it to the map of titles
  * @param filename the name of the file with the CSV of titles
  * @param graph the Graph that the titles are for
@@ -228,6 +234,14 @@ std::map<int,std::string> load_titles(const std::string& filename, const Graph& 
     return titles;
 }
 
+/**
+ * Loads a CSV of the Wikipedia titles for each index into a map in reverse.
+ * Each line in the file should be of the form "title, index"
+ * @param filename the name of the file with the CSV of titles
+ * @param graph the Graph that the titles are for
+ * @param file_length the length of the file (to help with termination of the while loop)
+ * @return a mapping of each Wikipedia article title to its index
+*/
 std::map<std::string,int> load_titles_reverse(const std::string& filename, const Graph& graph, const int& file_length) {
   std::map<std::string,int> titles;
     std::ifstream infile2(filename); //titles file
@@ -248,6 +262,14 @@ std::map<std::string,int> load_titles_reverse(const std::string& filename, const
     }
     return titles;
 }
+/**
+ * Loads a CSV of the betweenness centrality of each index into a map. 
+ * Each line in the file should be of the form "index, betweenness centrality"
+ * @param filename the name of the file with the CSV of titles
+ * @param graph the Graph that the titles are for
+ * @param file_length the length of the file (to help with termination of the while loop)
+ * @return a mapping of each index to its betweenness centrality
+*/
 std::map<int,double> load_betweenness(const std::string& filename, const Graph& graph, const int& file_length) {
   std::map<int,double> betweenness;
   std::ifstream infile2(filename); //titles file

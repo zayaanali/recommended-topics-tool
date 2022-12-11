@@ -7,6 +7,7 @@
 #include <cassert>
 #include <fstream>
 
+//COPIED FROM CS 225 CLASS FILES (SplitString is slightly modified for our purposes)
 /**
  * Takes a filename and reads in all the text from the file
  * Newline characters are also just characters in ASCII

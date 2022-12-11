@@ -3,7 +3,7 @@
 #include <fenv.h>
 #include <signal.h>
 #include <vector>
-
+//COPIED FROM CS 225 CLASS FILES (splitstring is slightly modified for our purposes)
 std::string file_to_string(const std::string& filename){
   std::ifstream text(filename);
 
