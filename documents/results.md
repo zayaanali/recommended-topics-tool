@@ -2,12 +2,14 @@
 ### Results
 ---
 Overall, we were able to complete most of the goals we set out to, however we ran into some issues with the output of one of our algorithms
+#### Leading Question
+Our goal with the project was to create a recommendation tool that would output related topics given two inputted Wikipedia page titles. We were able to create the recommendation tool and generated resonably meaningful results (see "Example Results").
 #### Our deliverables
    * Our makefiles run as expected
    * We properly read in our wikipedia set and built a graph based on it
    * We have thoroughly tested our graph and algorithms for bugs and memory leaks
-   * 2 Wikipedia page input outputs page related to both results
-   * 1 Wikipedia page recommendations are too large to be useful
+   * 2 Wikipedia page input - outputs pages related to both results with reasonable accuracy
+   * 1 Wikipedia page - recommendations were too large to be useful
    * See Kosaraju's algorithm for more details	 
 #### Algorithms & Traversals
    * Dataset trimming
@@ -51,6 +53,14 @@ Output: Western Culture, Country Music, Blues
 ```
 Inputs: Clarinet, Leonard Bernstein
 Output: Saxophone, Gustave Mahler, Benny Goodman
+```
+```
+Inputs: Mythology, Fish
+Output: Poseidon
+```
+```
+Inputs: Obesity, Dessert
+Output: Diabetes mellitus type 2
 ```
 
 **Kosaraju's**
