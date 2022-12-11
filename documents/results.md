@@ -20,7 +20,7 @@ Overall, we were able to complete most of the goals we set out to, however we ra
    * Used Kosaraju's Algorithm to find all of the strongly connected components in the trimmed dataset
     	* Consisted of first finding the DFS traversal of the graph, then running DFS again on the transpose of the original graph in the order of the original DFS
     	* Output resulted in nearly the all nodes being strongly connected (15.2k nodes)
-    	* This algorithm was therefore unable to provide us with any useful recommendation since nearly the entire dataset is strongly connected
+    	* This algorithm was therefore unable to provide us with any useful recommendation since nearly the entire dataset is strongly connected. We had originally wanted to identify small clusters of strongly connected nodes that would theoretically be highly related to each other.
 #### Verification Tests
 We created our own testing .txt files for verifying the functionality of the BFS, Brandes, and Kosaraju's algorithms. These simple tests were constructions of adjacency lists that could mathematically be quickly verified for their expected outputs and were compared to how our code performed these algorithms. The testing files that were used can be found here: [Here](https://github.com/zayaanali/cs225-final-project/tree/main/tests)
 
