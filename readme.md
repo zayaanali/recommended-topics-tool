@@ -48,6 +48,11 @@ cd build
 cmake ..
 make
 ```
+To clean the directory of any excess or unwanted object files or executables, run the following:
+```
+make clean
+```
+
 ## Data Parsing and Trimming
 Warning: For these following data parsing steps, the runtime is quite long so to save time, the parsed files titled "finaladj.txt", "finaltitles.txt", and "betweenness.txt" are also provided at this link (these 3 are the only files necessary to run the main algorithms in this program) and can be directly downloaded and placed into the "data" folder: [Here](https://drive.google.com/drive/folders/1D4qHG6QAGv98keLUF5j7drPEF9_2byoq?usp=sharing)<br>
 If the user chooses to save time by downloading from the provided link, these next steps for parsing and preprocessing can be ignored; otherwise, proceed with the following steps to manually run the terminal commands for parsing and preprocessing.
@@ -89,6 +94,9 @@ make test
 The tests being ran along with the sample .txt files that are being used as the testing input files can be found within the "tests" folder in the main directory, "cs225-final-project".
 
 ## Description/Features
+* The program can run the Brandes betweenness centrality algorithm on the .txt dataset file.
+* The program can run BFS on the .txt dataset file.
+* The program can run the Kosaraju's strongly connected components algorithm on the .txt dataset file.
 
 ## Project Structure
 
