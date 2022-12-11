@@ -1,7 +1,6 @@
 #include "graph.h"
 #include <stack>
 
-using std::cout;
 using std::vector;
 using std::map;
 using std::stack;
@@ -48,13 +47,6 @@ map<int, vector<int>> Graph::getSCCs() {
             numComponents++;
         }
     }
-    //prints out connected components
-    // for (auto const& [key, val] : SCCs) {
-    //     std::cout << key << ": ";  
-    //     for (auto it: val) {
-    //         cout << it << " ";
-    //     }
-    // }
     return SCCs;
 }
 
@@ -62,10 +54,9 @@ map<int, vector<int>> Graph::getSCCs() {
 void Graph::dfs_1(int v, stack<int> &s)  {
     // mark visited
     visited_[v] = true;
-    //cout << v << " ";
+
     // continue DFS
     for (int neighbor: graph_[v]) {
-        //cout << "HERE: " << graph_[v][i] << endl;
         if (!visited_[neighbor])
             dfs_1(neighbor, s);
     }
@@ -75,7 +66,6 @@ void Graph::dfs_1(int v, stack<int> &s)  {
 
 // DFS traversal order
 void Graph::dfs_2(int v, map<int, vector<int>> &SCCs,  int &numComponents, map<int, vector<int>> &transpose) {
-    // cout << v << " ";
     SCCs[numComponents].push_back(v); // add connected component
     visited_[v] = true;
 

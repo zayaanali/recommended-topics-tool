@@ -26,17 +26,6 @@ Graph::Graph(const std::string& filename, const int& file_length) {
       idx++;
     }
 
-    //creates a graph where nodes are only linked if an edge exists going both ways between the nodes.
-    // for (auto itr = idxs_.begin(); itr != idxs_.end(); itr++) {
-    //   std::vector<int> newadj;
-    //   for (int v: graph_[*itr]) {
-    //     if (std::find(graph_[v].begin(), graph_[v].end(), *itr) != graph_[v].end()) {
-    //       newadj.push_back(v);
-    //     }
-    //   }
-    //   stronggraph_[*itr] = newadj;
-    // }
-  // std::cout << graph_.size() << '\n';
 }
 
 /**
@@ -97,9 +86,6 @@ void Graph::BFS(std::unordered_set<int>& nodes, int start, int bound) {
 std::map<int, int> Graph::BFS(int start) {
   std::map<int, bool> visited;
   std::map<int, int> predecessor;
-  // for (auto itr = idxs_.begin(); itr != idxs_.end(); itr++) {
-  //   visited[*itr] = false;
-  // }
   
   std::queue<int> q;
   std::map<int, int> distance;

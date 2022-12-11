@@ -45,7 +45,6 @@ int main() {
 
     size_t pos = line.find(',');
 
-    //std::cout << line << '\n';
 
     //splits the line by comma and converts the index to an int
     int nodeID = std::stoi(line.substr(0, pos));
@@ -65,7 +64,6 @@ int main() {
   for (auto i = log.begin(); i != log.end(); i++) {
     if (i->second > 450) {
       filtered.push_back(std::make_pair(i->first, i->second));
-      //std::cout << i->first << ' ' << i->second << '\n';
     }
   }
   //sorts filtered by in-degree, from greatest to least
@@ -74,7 +72,6 @@ int main() {
   //write out the filtered Wikipedia pages 
   std::ofstream Writing("../data/filteredwiki.txt");
   for (auto i: filtered) {
-    // Writing << i.first << '\n';
     if (i.first == 3165770) {
       continue; //Exclude "List of sovereign states"
     }
