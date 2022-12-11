@@ -7,7 +7,6 @@
 #include <string>
 #include <unordered_set>
 #include<sstream>
-#include <queue>
 #include "utils.h"
 
 /** filter_titles.cpp
@@ -17,9 +16,9 @@
   * used to generate "filteredtitles.txt"
 */
 int main() {
-  static std::map<int, std::vector<int>> adj;
+  std::map<int, std::vector<int>> adj;
   std::unordered_set<int> idxs;
-  static std::map<int,std::string> titles;
+  std::map<int,std::string> titles;
   std::ifstream infile("../data/filteredadj.txt");
   
   //load adj list

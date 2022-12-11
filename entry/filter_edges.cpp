@@ -15,8 +15,8 @@
  * writes out output to "filteredadj.txt" as a csv where each line has the index of the node followed by all the nodes it is adjacent to
 */
 int main() {
-  static std::map<int, std::vector<int>> full_adj;
-  static std::map<int, std::vector<int>> cut_adj;
+  std::map<int, std::vector<int>> full_adj;
+  std::map<int, std::vector<int>> cut_adj;
   std::unordered_set<int> trimmed;
   std::ifstream infile("../data/filteredwiki.txt");
   std::ifstream infile2("../data/wikidata.txt"); //edge file

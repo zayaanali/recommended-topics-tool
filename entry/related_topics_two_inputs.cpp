@@ -1,21 +1,13 @@
-#include <map>
-#include <fstream>
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <utility>
-#include <string>
-#include <unordered_set>
-#include<sstream>
-#include<cmath>
-#include <queue>
-#include "utils.h"
 #include "graph.h"
+
+
 /** related_topics_two_inputs.cpp
  * takes two command line arguments of the indexes of two different Wikipedia pages
  * returns related topics to the given input by tracing back the shortest path between them and picking the node with the median betweenness centrality
  * when there are multiple predecessors to choose from.
 */
+
+
 std::map<int,double> betweenness;
 double closest = 0;
 bool compareB(const int &a,const int &b) {
@@ -86,8 +78,14 @@ int main(int argc, char** argv) {
     closest = betweenness[topic2];
     std::vector<int> neighbors = graph.getAdjacent(topic1);
     std::sort(neighbors.begin(), neighbors.end(), closeB);
-    std::cout << "Direct link exists, finding a neighbor of " << titles[topic1] << " similar to " << titles[topic2] << '\n';
-    std::cout << titles[neighbors[1]] << '\n';
+    std::cout << "Direct link exists, finding neighbors of " << titles[topic1] << " similar to " << titles[topic2] << '\n';
+    if (neighbors.size() == 1) {
+      std::cout << "No other neighbors found!" << '\n';
+    }
+    for (unsigned int i = 1; i < neighbors.size() && i <=3; i++) {
+      std::cout << titles[neighbors[i]] << '\n';
+    }
+
   } else {
     for (int stop: street[street.size() / 2]) { //goes to the middle group of predecessors on the path, should be most related to both topics
     std::cout << titles[stop] << '\n';

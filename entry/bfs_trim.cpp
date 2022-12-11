@@ -1,15 +1,6 @@
-#include <map>
-#include <fstream>
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <utility>
-#include <string>
-#include <unordered_set>
-#include<sstream>
-#include <queue>
-#include "utils.h"
 #include "graph.h"
+
+
 /** bfs_trim.cpp
   * fourth and final step in data parsing pipeline
   * Trims down the initially filtered 24K nodes to a single connected graph of around ~15K
@@ -20,26 +11,46 @@
   * Writes out the final CSV of title labels for each node index to "finaltitles.txt"
 */
 int main() {
-  static std::map<int,std::string> titles;
-  std::unordered_set<int> trimmed;
+
+  std::map<int,std::string> titles;
+
+  //will contain the set of trimmed nodes
+  std::unordered_set<int> trimmed; 
+
+  //load graph
   Graph graph("../data/filteredadj.txt", 23757);
   titles = load_titles("../data/filteredtitles.txt", graph, 23757);
+
+  //set seeds
   std::vector<int> topten = {2038044, 3846441, 423902}; //United States, Animal, Food (3 general topics)
-  trimmed = graph.BFS_Trim(topten, 2);
-  std::cout << trimmed.size() << '\n';
+  trimmed = graph.BFS_Trim(topten, 2); //runs a BFS, going up to 2 steps away from each seed
+
+  //print out size of trimmed data set
+  std::cout << "Number of vertices: " << trimmed.size() << '\n';
+
+  //write out the trimmed set of nodes and edges in an adjacency list and the titles for the remaining nodes
+
   std::ofstream Writing("../data/finaladj.txt");
   std::ofstream Writing2("../data/finaltitles.txt");
+
+  //count the number of edegs
   int edges = 0;
   for (auto itr = trimmed.begin(); itr != trimmed.end(); itr++) {
-    Writing2 << *itr << ',' << titles[*itr] << '\n'; //writes out the final 40K titles
+    //writes out the trimmed titles, each line is "idx, titles"
+    Writing2 << *itr << ',' << titles[*itr] << '\n'; 
+
     std::vector<int> adjacent = graph.getAdjacent(*itr);
     std::vector<int> newadj;
-    for (int v: adjacent) {
+
+    //creates a new vector of adjacent neighbors (filters out all removed pages)
+    for (int v: adjacent) { 
       if (trimmed.find(v) != trimmed.end()) {
         edges++;
         newadj.push_back(v);
       }
     }
+
+    //format as a CSV
     std::string adding;
     for (int to: newadj) {
       adding += std::to_string(to) + ","; 
@@ -47,10 +58,11 @@ int main() {
     if (adding.length() > 0) {
       adding.pop_back(); //remove the comma at the end
     }
-    Writing << *itr << ',' << adding << '\n';
+    Writing << *itr << ',' << adding << '\n'; //write out the line
   }
+
   Writing.close();
-  
   Writing2.close();
-  std::cout << edges << '\n';
+  
+  std::cout << "Number of edges: " << edges << '\n';
 }
