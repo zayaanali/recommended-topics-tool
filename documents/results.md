@@ -51,4 +51,5 @@ Output: Saxophone, Gustave Mahler, Benny Goodman
 ```
 
 **Kosaraju's**
-![Kosaraju Output](documents/images/kosaraju_result.png)
+<br>
+![Kosaraju Output](images/kosaraju_result.png)
