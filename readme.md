@@ -94,9 +94,9 @@ make test
 The tests being ran along with the sample .txt files that are being used as the testing input files can be found within the "tests" folder in the main directory, "cs225-final-project".
 
 ## Description/Features
-* The program can run the Brandes betweenness centrality algorithm on the .txt dataset file.
-* The program can run BFS on the .txt dataset file.
-* The program can run the Kosaraju's strongly connected components algorithm on the .txt dataset file.
+* The program can run the Brandes betweenness centrality algorithm on any CSV file storing an adjacency list for a graph.
+* The program can run BFS on any CSV file storing an adjacency list for a graph.
+* The program can run the Kosaraju's strongly connected components algorithm on any CSV file storing an adjacency list for a graph.
 
 ## Project Structure
 
