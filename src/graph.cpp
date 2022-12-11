@@ -17,8 +17,18 @@ Graph::Graph(const std::string& filename, const int& file_length) {
           break;
       }
       std::getline(infile, line);
+      //check if line is empty
+      if (line.length() == 0) {
+        idx++;
+        continue;
+      }
       std::vector<int> parts;
-      SplitString(line, ',', parts);
+      try {
+        SplitString(line, ',', parts);
+      } catch (...) {
+        std::cout << "Could not find a valid nodeID on line: " << idx + 1 << '\n';
+        std::cout << "Please check the input file" << '\n';
+      }
       int nodeID = parts[0];
       idxs_.insert(nodeID);
       parts.erase(parts.begin());
@@ -205,11 +215,23 @@ std::map<int,std::string> load_titles(const std::string& filename, const Graph& 
       if (idx == file_length) {
             break;
       }
-        
       std::getline(infile2, line);
       std::stringstream s_stream(line);
+
+      //check if line is empty
+      if (line.length() == 0) {
+        idx++;
+        continue;
+      }
       size_t pos = line.find(',');
-      int id = std::stoi(line.substr(0, pos));
+      //convert id to int
+      int id;
+      try {
+        id = std::stoi(line.substr(0, pos));
+      } catch (...) {
+        std::cout << "Could not find a valid nodeID on line: " << idx + 1 << '\n';
+        std::cout << "Please check the input file" << '\n';
+      }
       line.erase(0, pos + 1);
       titles[id] = line;
       idx++;
@@ -236,8 +258,20 @@ std::map<std::string,int> load_titles_reverse(const std::string& filename, const
       }
       std::getline(infile2, line);
       std::stringstream s_stream(line);
+      //check if line is empty
+      if (line.length() == 0) {
+        idx++;
+        continue;
+      }
       size_t pos = line.find(',');
-      int id = std::stoi(line.substr(0, pos));
+      //convert id to int
+      int id;
+      try {
+        id = std::stoi(line.substr(0, pos));
+      } catch (...) {
+        std::cout << "Could not find a valid nodeID on line: " << idx + 1 << '\n';
+        std::cout << "Please check the input file" << '\n';
+      }
       line.erase(0, pos + 1);
       line = line.substr(1, line.length() - 2);
       titles[line] = id;
@@ -265,7 +299,20 @@ std::map<int,double> load_betweenness(const std::string& filename, const Graph& 
     std::getline(infile2, line);
     std::stringstream s_stream(line);
     size_t pos = line.find(',');
-    int id = std::stoi(line.substr(0, pos));
+    //check if line is empty
+    if (line.length() == 0) {
+      idx++;
+      continue;
+    }
+    //convert id to int
+    int id;
+    try {
+      id = std::stoi(line.substr(0, pos));
+    } catch (...) {
+      std::cout << "Could not find a valid nodeID on line: " << idx + 1 << '\n';
+      std::cout << "Please check the input file" << '\n';
+    }
+
     line.erase(0, pos + 1);
     betweenness[id] = stod(line);
     idx++;

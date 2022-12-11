@@ -47,3 +47,11 @@ TEST_CASE("test bfs trim line from middle") {
     std::unordered_set<int> expected({5, 6, 7, 8, 9});
     REQUIRE(expected == actual);
 }
+
+TEST_CASE("test bfs trim three lines") {
+    Graph graph("../tests/testbfs5.txt", 8);
+    std::vector<int> seeds = {1};
+    std::unordered_set<int> actual = graph.BFS_Trim(seeds, 2);
+    std::unordered_set<int> expected({1, 2, 3, 5, 6, 8, 9});
+    REQUIRE(expected == actual);
+}

@@ -39,6 +39,7 @@ int main(int argc, char** argv) {
   //load the graph
   Graph graph("../data/finaladj.txt", 15470);
   std::map<int,std::string> titles = load_titles("../data/finaltitles.txt", graph, 15470);
+  
   //converts Wikipedia string titles to their index
   std::map<std::string,int> reverse_titles = load_titles_reverse("../data/finaltitles.txt", graph, 15470);
 

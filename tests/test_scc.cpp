@@ -42,3 +42,32 @@ TEST_CASE("test scc simple 2") {
         REQUIRE(actual == expecteds[i]);
     }
 }
+TEST_CASE("test scc line not connected") {
+    //straight line of vertices
+    Graph graph("../tests/testbfs2.txt", 12);
+    std::map<int, std::vector<int>> sccs = graph.getSCCs();
+    REQUIRE(sccs.size() == 13);
+}
+TEST_CASE("test scc line connected") {
+    //straight line of vertices
+    Graph graph("../tests/test_scc_line_connected.txt", 13);
+    std::map<int, std::vector<int>> sccs = graph.getSCCs();
+    REQUIRE(sccs.size() == 1);
+}
+TEST_CASE("test scc three linked") {
+    //straight line of vertices
+    Graph graph("../tests/test_scc_three_linked.txt", 6);
+    std::map<int, std::vector<int>> sccs = graph.getSCCs();
+    REQUIRE(sccs.size() == 3);
+    std::unordered_set<int> expected1({0,1});
+    std::unordered_set<int> expected2({2,3});
+    std::unordered_set<int> expected3({4,5});
+    std::vector<std::unordered_set<int>> expecteds;
+    expecteds.push_back(expected1);
+    expecteds.push_back(expected2);
+    expecteds.push_back(expected3);
+    for (int i = 0; i < 3; i++) {
+        std::unordered_set<int> actual(sccs[i].begin(), sccs[i].end());
+        REQUIRE(actual == expecteds[i]);
+    }
+}
