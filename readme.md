@@ -3,7 +3,7 @@
 ## Team Members: zaali2, aswar3, shyammt2, bchang
 
 ## Video Presentation
-The video presentation for this project can be found here:
+The video presentation for this project can be found here: [Here](https://www.youtube.com/watch?v=dO5oO-4xMm0)
 
 ## Introduction
 This goal of this project was to use the Stanford English Wikipedia Hyperlink Network dataset to create a related topics recommendation tool capable of giving recommended articles similar to an input of either 1 or 2 articles. The following algorithms were used to generate the related topics:
@@ -19,6 +19,8 @@ This goal of this project was to use the Stanford English Wikipedia Hyperlink Ne
     * [Here](https://github.com/zayaanali/cs225-final-project/blob/main/documents/proposal.md)
 * Link to Development Logs
     * [Here](https://github.com/zayaanali/cs225-final-project/blob/main/documents/devlog.md)
+* Link to Results Report
+    * [Here](https://github.com/zayaanali/cs225-final-project/blob/main/documents/results.md)
 
 ## Installation
 The first step in the installation of this project is to create a folder on the user's local computer 
@@ -49,7 +51,7 @@ make
 ## Data Parsing and Trimming
 Warning: For these following data parsing steps, the runtime is quite long so to save time, the parsed files titled "finaladj.txt", "finaltitles.txt", and "betweenness.txt" are also provided at this link (these 3 are the only files necessary to run the main algorithms in this program) and can be directly downloaded and placed into the "data" folder: [Here](https://drive.google.com/drive/folders/1D4qHG6QAGv98keLUF5j7drPEF9_2byoq?usp=sharing)<br>
 If the user chooses to save time by downloading from the provided link, these next steps for parsing and preprocessing can be ignored; otherwise, proceed with the following steps to manually run the terminal commands for parsing and preprocessing.
-Now that the build files have been created, the first step is to run the data parsing and preprocessing commands in the same order as follows:<br>
+Now that the build files have been created, the first step is to run the data parsing and preprocessing commands in the same order as follows inside the build folder in the terminal:<br>
 ```
 ./filter_data
 ./filter_edges
@@ -70,7 +72,13 @@ For example, a user input of<br>
 ./related_topics_two_inputs "Italy" "Food"
 ```
 <br>will yield a result of "Emilia-Romagna". This is a region in Italy known for its culinary cuisine. Make sure that the command line arguments are wrapped in quotation marks, as this allows for strings with multiple words.
-<br>NEED TO ADD STRONGLY CONNECTED COMPONENTS HERE
+
+## Using the Strongly Connected Components Tool
+To run the code for the strongly connected components algorithm, run the following in the terminal and ensure you are in the build folder:
+```
+./connectedcomponentstest
+```
+After running this, the user can now see the size of each strongly connected component for the "finaltitles.txt" dataset.
 
 ## Testing
 The code provides a wide variety of testing for the various functions and algorithms utilized within the program. To build and run the test suite, run the following commands:<br>

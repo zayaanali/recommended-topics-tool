@@ -10,9 +10,8 @@
 #include <queue>
 #include "utils.h"
 #include "graph.h"
-/** brandes.cpp
- * Runs Brandes on the trimmed Wikipedia data set
- * Writes a CSV out to betweenness.txt where each line is of the form "node index","betweenness centrality"
+/** connectedcomponentstest.cpp
+ * Runs the strongly connected components algorithm on the finaltitles.txt dataset
 */
 int main() {
   Graph graph("../data/finaladj.txt", 15470);
