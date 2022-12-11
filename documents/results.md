@@ -26,6 +26,9 @@ We created our own testing .txt files for verifying the functionality of the BFS
 
 #### Example Results:
 
+**BFS**
+The output of BFS was just the trimmed and parsed dataset files that were mentioned in the "Data Parsing and Trimming" section of the readme.md file, which is linked here: [Here](https://github.com/zayaanali/cs225-final-project/blob/main/readme.md)
+
 **Brandes**
 
 ```
@@ -51,7 +54,7 @@ Output: Saxophone, Gustave Mahler, Benny Goodman
 ```
 
 **Kosaraju's**
-<br><br>
+<br>
 ![Kosaraju Output](images/kosaraju_result.png)
 <br>
 The number 5 describes the number of strongly connected components present in the graph. The number after for example "0:" which is 15466 describes how large the component is or what size it is.
