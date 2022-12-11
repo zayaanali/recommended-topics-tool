@@ -3,7 +3,9 @@
 ---
 Overall, we were able to complete most of the goals we set out to, however we ran into some issues with the output of one of our algorithms
 #### Leading Question
-Our goal with the project was to create a recommendation tool that would output related topics given two inputted Wikipedia page titles. We were able to create the recommendation tool and generated resonably meaningful results (see "Example Results").
+Our goal with the project was to create a recommendation tool that would output related topics given two inputted Wikipedia page titles. We were able to create the recommendation tool and generated resonably meaningful results (see "Example Results"). 
+
+However, we were not able to use the strongly connected components algorithm to create a second recommendation tool taking in only one input like we'd hoped. The entire graph ended up being one large strongly connected component, showing the highly-interconnected nature of Wikipedia articles. Therefore, strongly connected components were not meaningful when trying to find related articles. 
 #### Our deliverables
    * Our makefiles run as expected
    * We properly read in our wikipedia set and built a graph based on it
@@ -26,6 +28,21 @@ Our goal with the project was to create a recommendation tool that would output 
 #### Verification Tests
 We created our own testing .txt files for verifying the functionality of the BFS, Brandes, and Kosaraju's algorithms. These simple tests were constructions of adjacency lists that could mathematically be quickly verified for their expected outputs and were compared to how our code performed these algorithms. The testing files that were used can be found here: [Here](https://github.com/zayaanali/cs225-final-project/tree/main/tests)
 
+#### Future Directions
+Some potential ways to improve our algorithm could be:
+1. Have a stricter definition of an edge/make the graph weighted
+   * Many Wikipedia articles that shouldn't be related are linked to each other, making results less accurate. Weighting the strength of the connection somehow or finding some method to reduce "bad" edges would improve the accuracy of our algorithm.
+2. Identify clusters/themes
+   * Originally, we'd hoped that identifying strongly connected components would give us groups of nodes that would all be related to a broader topic (i.e. all instruments would be under a "Music" strongly connected component).
+   * Being able to identify clusters of nodes that trace back to a broader topic would greatly improve the relevance and usefulness of results. For example, when inputting "Beethoven" and "Mozart," our code will output "Violin", "Syphyllis", and "Alcoholism." While syphillis and alcoholism are technically related to both Beethoven and Mozart, it would be much more useful if the program could identify "Beethoven" and "Mozart" as composers and output music-related topics. 
+   * One potential way to do this could be to focus on the nodes with extremely high betweenness centrality scores (see "Example results" for Brandes) and use them as umbrella topics to classify lower-ranked nodes. 
+3. Text search/fuzzy matching
+   * Currently, "related_topics_two_inputs" requires the inputs to be formatted exactly how they appear in the "finaltitles.txt" file.
+   * It would be much more convenient if users could search for their query (i.e. entering "Beethoven" instead of "Ludwig van Beethoven")
+4. Adding randomness
+   * Our program will always return the same topics given the same inputs
+   * This is not very practical since if the program were being used as a recommendation tool, it would work the first time but then be useless after the user reads the related articles.
+   * Ideally, there would be some level of randomness to always find new related topics to keep the reader interested. 
 #### Example Results:
 
 **BFS**
