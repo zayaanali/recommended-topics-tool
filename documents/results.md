@@ -51,5 +51,7 @@ Output: Saxophone, Gustave Mahler, Benny Goodman
 ```
 
 **Kosaraju's**
-<br>
+<br><br>
 ![Kosaraju Output](images/kosaraju_result.png)
+<br>
+The number 5 describes the number of strongly connected components present in the graph. The number after for example "0:" which is 15466 describes how large the component is or what size it is.
