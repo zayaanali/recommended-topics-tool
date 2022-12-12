@@ -81,7 +81,7 @@ For example, a user input of<br>
 ## Using the Strongly Connected Components Tool
 To run the code for the strongly connected components algorithm, run the following in the terminal and ensure you are in the build folder:
 ```
-./connectedcomponentstest
+./connectedcomponents
 ```
 After running this, the user can now see the size of each strongly connected component for the "finaltitles.txt" dataset.
 

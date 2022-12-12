@@ -4,6 +4,8 @@
 /** brandes.cpp
  * Runs Brandes on the trimmed Wikipedia data set
  * Writes a CSV out to betweenness.txt where each line is of the form "node index","betweenness centrality"
+ * WARNING: TAKES MULTIPLE HOURS TO RUN. 
+ * OUTPUT FILE CAN BE DOWNLOADED USING THE LINK TO THE GOOGLE DRIVE FOLDER IN THE GIT REPO AT TOP OF DATA PARSING/TRIMMING SECTION
 */
 int main() {
   //load graph
