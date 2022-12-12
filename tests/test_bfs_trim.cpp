@@ -55,3 +55,26 @@ TEST_CASE("test bfs trim three lines") {
     std::unordered_set<int> expected({1, 2, 3, 5, 6, 8, 9});
     REQUIRE(expected == actual);
 }
+TEST_CASE("test bfs trim wheel 1") {
+    Graph graph("../tests/test_brandes_wheel.txt", 7);
+    std::vector<int> seeds = {1};
+    std::unordered_set<int> actual = graph.BFS_Trim(seeds, 1);
+    std::unordered_set<int> expected({1, 2, 3, 4, 5, 6, 7});
+    REQUIRE(expected == actual);
+}
+TEST_CASE("test bfs trim wheel 2") {
+    Graph graph("../tests/test_brandes_wheel.txt", 7);
+    std::vector<int> seeds = {2};
+    std::unordered_set<int> actual = graph.BFS_Trim(seeds, 1);
+    std::unordered_set<int> expected({2,1});
+    REQUIRE(expected == actual);
+}
+TEST_CASE("test bfs trim wheel 3") {
+    Graph graph("../tests/test_brandes_wheel.txt", 7);
+    std::vector<int> seeds = {2};
+    std::unordered_set<int> actual = graph.BFS_Trim(seeds, 2);
+    std::unordered_set<int> expected({1,2,3,4,5,6,7});
+    REQUIRE(expected == actual);
+}
+
+

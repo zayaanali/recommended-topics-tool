@@ -38,6 +38,9 @@ int SplitString(const std::string & str1, char sep, std::vector<int> &fields) {
         }
         str.erase(0,pos+1);  
     }
+    if (str.length() == 1 && !std::isdigit(str[0])) {
+        str = "";
+    } //prevents weird bug for lines where vertices dont have neighbors
     if (str.length() > 0) {
         fields.push_back(std::stoi(str));
     }

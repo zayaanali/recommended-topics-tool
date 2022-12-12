@@ -10,6 +10,20 @@ using std::endl;
 using std::string;
 
 
+TEST_CASE("test brandes no edges") {
+    Graph graph("../tests/test_scc_no_edges.txt", 4);
+    std::map<int, double> betweeness = graph.brandes();
+    for (int i = 1; i <= 4; i++) {
+        REQUIRE(betweeness[i] == 0); //nothing is connected
+    }
+}
+TEST_CASE("test brandes simplest") {
+    Graph graph("../tests/test_brandes_simplest.txt", 3);
+    std::map<int, double> betweeness = graph.brandes();
+    REQUIRE(betweeness[1] == 0);
+    REQUIRE(betweeness[2] == 1);
+    REQUIRE(betweeness[3] == 0);
+}
 TEST_CASE("test brandes simple 1") {
     Graph graph("../tests/test_brandes_simple1.txt", 4);
     std::map<int, double> betweeness = graph.brandes();
@@ -23,6 +37,14 @@ TEST_CASE("test brandes simple 2") {
     std::map<int, double> betweeness = graph.brandes();
     for (int i = 1; i <= 4; i++) {
         REQUIRE(betweeness[i] == 3); //graph is one cycle so all nodes should have the same centrality
+    }
+}
+TEST_CASE("test brandes simple 3") {
+    Graph graph("../tests/test_brandes_simple3.txt", 20);
+    std::map<int, double> betweeness = graph.brandes();
+    for (int i = 1; i <= 20; i++) {
+        REQUIRE(betweeness[i] == 171); //graph is one cycle so all nodes should have the same centrality
+        //1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 + 15 + 16 + 17 + 18
     }
 }
 TEST_CASE("test brandes wheel") {
@@ -47,3 +69,4 @@ TEST_CASE("test brandes multiple shortest paths") {
     REQUIRE(betweeness[7] == (1.0/4.0) + 1);
     REQUIRE(betweeness[8] == (1.0/4.0) + 1);
 }
+
